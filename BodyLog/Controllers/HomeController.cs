@@ -15,12 +15,19 @@ namespace BodyLog.Controllers
         {
             return View();
         }
+        
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Product(ProductModel model)
         {
-            int recordsCreated = ProductsProcessor.AddProduct(model.Name, model.Calories, model.IdCategory, 1);
-
             ViewBag.Message = "Add a product";
+            if (ModelState.IsValid)
+            {
+                int recordsCreated = ProductsProcessor.AddProduct(model.Name, model.Calories, model.IdCategory, 1);
+                return RedirectToAction("Index");
+            }
+
 
             return View();
         }
