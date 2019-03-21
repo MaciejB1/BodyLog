@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BodyLog", "BodyLog\BodyLog.csproj", "{2DD3A7BF-3B42-475F-9108-0042AC95FF96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibrary", "DataLibrary\DataLibrary.csproj", "{C70B46EC-C5AD-455C-8F3B-2D1C29E9670E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2DD3A7BF-3B42-475F-9108-0042AC95FF96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DD3A7BF-3B42-475F-9108-0042AC95FF96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DD3A7BF-3B42-475F-9108-0042AC95FF96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C70B46EC-C5AD-455C-8F3B-2D1C29E9670E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C70B46EC-C5AD-455C-8F3B-2D1C29E9670E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C70B46EC-C5AD-455C-8F3B-2D1C29E9670E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C70B46EC-C5AD-455C-8F3B-2D1C29E9670E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

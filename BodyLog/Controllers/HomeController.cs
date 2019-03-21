@@ -1,8 +1,11 @@
-﻿using System;
+﻿using BodyLog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataLibrary;
+using DataLibrary.BusinessLogic;
 
 namespace BodyLog.Controllers
 {
@@ -13,18 +16,21 @@ namespace BodyLog.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Product(ProductModel model)
         {
-            ViewBag.Message = "Your application description page.";
+            int recordsCreated = ProductsProcessor.AddProduct(model.Name, model.Calories, model.IdCategory, 1);
+
+            ViewBag.Message = "Add a product";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult FoodDiaryView()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Choose an option";
 
             return View();
         }
+
     }
 }
