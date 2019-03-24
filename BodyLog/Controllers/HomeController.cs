@@ -15,23 +15,28 @@ namespace BodyLog.Controllers
         {
             return View();
         }
-        
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Product(ProductModel model)
+        public ActionResult Foods()
         {
-            ViewBag.Message = "Add a product";
-            if (ModelState.IsValid)
-            {
-                int recordsCreated = ProductsProcessor.AddProduct(model.Name, model.Calories, model.IdCategory, 1);
-                return RedirectToAction("Index");
-            }
+            var dataContext = new BodyLogDataContext();
+            var foods = from m in dataContext.Foods select m;
 
+            return View(foods);
+        }
 
+        public ActionResult AddProductForm()
+        {
             return View();
         }
 
+       [HttpGet]
+       public void AddProduct()
+        {
+            
+            
+        }
+        
+        
         public ActionResult FoodDiaryView()
         {
             ViewBag.Message = "Choose an option";
