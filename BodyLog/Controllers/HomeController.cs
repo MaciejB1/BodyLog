@@ -16,6 +16,27 @@ namespace BodyLog.Controllers
             return View();
         }
 
+
+        public ActionResult Foods()
+        {
+            var dataContext = new BodyLogDataContext();
+            var foods = from m in dataContext.Foods select m;
+
+            return View(foods);
+        }
+
+        public ActionResult AddProductForm()
+        {
+            return View();
+        }
+
+       [HttpGet]
+       public void AddProduct()
+        {
+            
+            
+        }
+
         public ActionResult Product(ProductModel model)
         {
             int recordsCreated = ProductsProcessor.AddProduct(model.Name, model.Calories, model.IdCategory, 1);
