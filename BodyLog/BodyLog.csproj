@@ -213,6 +213,7 @@
       <DependentUpon>BodyLogDB.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DailyModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -293,6 +294,7 @@
     <Content Include="Views\Home\AddProductForm.cshtml" />
     <Content Include="Views\Home\AddProduct.cshtml" />
     <Content Include="Views\Home\ViewProducts.cshtml" />
+    <Content Include="Views\Home\AddDiaryLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />

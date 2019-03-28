@@ -9,11 +9,11 @@ namespace BodyLog.Models
     public class ProductModel
     {
         [Display(Name = "Nazwa produktu")]
-        [Required(ErrorMessage = "You need to input a name of product")]
+        [Required(ErrorMessage = "Wprowadź nazwę produktu.")]
         public string Name { get; set; }
 
         [Display(Name = "Kalorie na 100g")]
-        [Required(ErrorMessage = "You need to input the calories")]
+        [Required(ErrorMessage = "Wprowadź liczbę kalorii")]
         public int Calories { get; set; }
     }
 }
