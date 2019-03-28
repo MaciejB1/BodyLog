@@ -8,15 +8,12 @@ namespace BodyLog.Models
 {
     public class ProductModel
     {
-        [Display(Name = "Name of product")]
+        [Display(Name = "Nazwa produktu")]
         [Required(ErrorMessage = "You need to input a name of product")]
         public string Name { get; set; }
 
-        [Display(Name = "Calories per 100g")]
+        [Display(Name = "Kalorie na 100g")]
         [Required(ErrorMessage = "You need to input the calories")]
         public int Calories { get; set; }
-
-        [Display(Name = "Category")]
-        public int IdCategory { get; set; }
     }
 }

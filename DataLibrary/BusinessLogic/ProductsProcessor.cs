@@ -10,26 +10,22 @@ namespace DataLibrary.BusinessLogic
 {
     public static class ProductsProcessor
     {
-        public static int AddProduct(string name, int calories,
-            int idCategories, int idAccount)
+        public static int AddProduct(string name, int calories)
         {
             ProductsModel data = new ProductsModel
             {
                 Name = name,
-                Calories = calories,
-                IdCategories = idCategories,
-                IdAccount = idAccount
+                Calories = calories
             };
 
-            string sql = @"INSERT INTO Food_Products (name, calories, Food_Categories_idFood_Categories, Account_idAccount)
-                            values(@Name, @Calories, @IdCategories, @IdAccount);";
+            string sql = @"INSERT INTO Foods (name, calories) values(@Name, @Calories);";
 
             return SqlDataAccess.SaveData(sql, data);
         }
 
         public static List<ProductsModel> LoadProducts()
         {
-            string sql = @"select name, calories, Food_Categories_idFood_Categories, Account_idAccount from Food_Products;";
+            string sql = @"select name, calories from Foods;";
 
             return SqlDataAccess.LoadData<ProductsModel>(sql);
         }

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using DataLibrary;
 using DataLibrary.BusinessLogic;
 
+
 namespace BodyLog.Controllers
 {
     public class HomeController : Controller
@@ -29,19 +30,52 @@ namespace BodyLog.Controllers
             return View();
         }
 
-       [HttpGet]
-       public void AddProduct()
+        public ActionResult AddProduct()
         {
-            
+            ViewBag.Message = "Add Product";
+
+            return View();
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddProduct(ProductModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int RecordCreated = ProductsProcessor.AddProduct(model.Name, model.Calories);
+                return RedirectToAction("Index");
+            }
+
+            return View();
             
         }
-        
         
         public ActionResult FoodDiaryView()
         {
             ViewBag.Message = "Choose an option";
 
             return View();
+        }
+
+        public ActionResult ViewProducts()
+        {
+            ViewBag.Message = "Products List";
+
+            var data = ProductsProcessor.LoadProducts();
+            List<ProductModel> products = new List<ProductModel>();
+
+            foreach (var row in data)
+            {
+                products.Add(new ProductModel
+                {
+                    Name = row.Name,
+                    Calories = row.Calories
+                });
+            }
+
+            return View(products);
         }
 
     }

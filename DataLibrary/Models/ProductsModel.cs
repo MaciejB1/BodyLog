@@ -10,7 +10,5 @@ namespace DataLibrary.Models
     {
         public string Name { get; set; }
         public int Calories { get; set; }
-        public int IdCategories { get; set; }
-        public int IdAccount { get; set; }
     }
 }
