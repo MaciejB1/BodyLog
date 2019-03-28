@@ -1,23 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BodyLogDB" Class="AccountsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BodyLogDB" Class="BodyLogDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\BodyLogDB.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BodyLogDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Accounts" Member="Accounts">
     <Type Name="Account">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id" Member="id" Storage="_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Account_Food" Member="Food" ThisKey="Id" OtherKey="Id" Type="Food" Cardinality="One" />
     </Type>
   </Table>
-  <Table Name="dbo.Foods" Member="Foods">
+  <Table Name="" Member="Dishes_Foods">
+    <Type Name="Dishes_Foods">
+      <Column Name="fk_Dishes" Type="System.Int32" CanBeNull="false" />
+      <Column Name="fk_Food" Type="System.Int32" CanBeNull="false" />
+      <Association Name="Dishes_Dishes_Foods" Member="Dishes" ThisKey="fk_Dishes" OtherKey="id" Type="Dishes" IsForeignKey="true" />
+      <Association Name="Food_Dishes_Foods" Member="Food" ThisKey="fk_Food" OtherKey="id" Type="Food" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="" Member="Dishes">
+    <Type Name="Dishes">
+      <Column Name="id" Type="System.Int32" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" CanBeNull="false" />
+      <Column Name="calories" Type="System.Single" CanBeNull="false" />
+      <Column Name="fkDishes_Categories" Type="System.Int32" CanBeNull="false" />
+      <Association Name="Dishes_Dishes_Foods" Member="Dishes_Foods" ThisKey="id" OtherKey="fk_Dishes" Type="Dishes_Foods" />
+      <Association Name="Dishes_Categories_Dishes" Member="Dishes_Categories" ThisKey="fkDishes_Categories" OtherKey="id" Type="Dishes_Categories" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="" Member="Dishes_Categories">
+    <Type Name="Dishes_Categories">
+      <Column Name="id" Type="System.Int32" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" CanBeNull="false" />
+      <Association Name="Dishes_Categories_Dishes" Member="Dishes" ThisKey="id" OtherKey="fkDishes_Categories" Type="Dishes" />
+    </Type>
+  </Table>
+  <Table Name="" Member="Foods">
     <Type Name="Food">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Id" Member="id" Storage="_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="calories" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="Account_Food" Member="Account" ThisKey="Id" OtherKey="Id" Type="Account" IsForeignKey="true" />
+      <Column Name="fkFood_Categories" Type="System.Int32" CanBeNull="false" />
+      <Association Name="Food_Dishes_Foods" Member="Dishes_Foods" ThisKey="id" OtherKey="fk_Food" Type="Dishes_Foods" />
+      <Association Name="Food_Categories_Food" Member="Food_Categories" ThisKey="fkFood_Categories" OtherKey="id" Type="Food_Categories" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="" Member="Tests">
-    <Type Name="Test">
-      <Column Name="test" Type="System.String" CanBeNull="false" />
+  <Table Name="" Member="Food_Categories">
+    <Type Name="Food_Categories">
+      <Column Name="id" Type="System.Int32" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" CanBeNull="false" />
+      <Association Name="Food_Categories_Food" Member="Foods" ThisKey="id" OtherKey="fkFood_Categories" Type="Food" />
     </Type>
   </Table>
 </Database>

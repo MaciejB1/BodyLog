@@ -33,9 +33,18 @@ namespace BodyLog.Models
     partial void InsertAccount(Account instance);
     partial void UpdateAccount(Account instance);
     partial void DeleteAccount(Account instance);
+    partial void InsertDishes(Dishes instance);
+    partial void UpdateDishes(Dishes instance);
+    partial void DeleteDishes(Dishes instance);
+    partial void InsertDishes_Categories(Dishes_Categories instance);
+    partial void UpdateDishes_Categories(Dishes_Categories instance);
+    partial void DeleteDishes_Categories(Dishes_Categories instance);
     partial void InsertFood(Food instance);
     partial void UpdateFood(Food instance);
     partial void DeleteFood(Food instance);
+    partial void InsertFood_Categories(Food_Categories instance);
+    partial void UpdateFood_Categories(Food_Categories instance);
+    partial void DeleteFood_Categories(Food_Categories instance);
     #endregion
 		
 		public BodyLogDataContext() : 
@@ -76,6 +85,30 @@ namespace BodyLog.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<Dishes_Foods> Dishes_Foods
+		{
+			get
+			{
+				return this.GetTable<Dishes_Foods>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Dishes> Dishes
+		{
+			get
+			{
+				return this.GetTable<Dishes>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Dishes_Categories> Dishes_Categories
+		{
+			get
+			{
+				return this.GetTable<Dishes_Categories>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Food> Foods
 		{
 			get
@@ -84,11 +117,11 @@ namespace BodyLog.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Test> Tests
+		public System.Data.Linq.Table<Food_Categories> Food_Categories
 		{
 			get
 			{
-				return this.GetTable<Test>();
+				return this.GetTable<Food_Categories>();
 			}
 		}
 	}
@@ -103,26 +136,23 @@ namespace BodyLog.Models
 		
 		private string _email;
 		
-		private EntityRef<Food> _Food;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
     partial void OnemailChanging(string value);
     partial void OnemailChanged();
     #endregion
 		
 		public Account()
 		{
-			this._Food = default(EntityRef<Food>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Id", Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
 		{
 			get
 			{
@@ -132,11 +162,11 @@ namespace BodyLog.Models
 			{
 				if ((this._Id != value))
 				{
-					this.OnIdChanging(value);
+					this.OnidChanging(value);
 					this.SendPropertyChanging();
 					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
@@ -157,35 +187,6 @@ namespace BodyLog.Models
 					this._email = value;
 					this.SendPropertyChanged("email");
 					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Food", Storage="_Food", ThisKey="Id", OtherKey="Id", IsUnique=true, IsForeignKey=false)]
-		public Food Food
-		{
-			get
-			{
-				return this._Food.Entity;
-			}
-			set
-			{
-				Food previousValue = this._Food.Entity;
-				if (((previousValue != value) 
-							|| (this._Food.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Food.Entity = null;
-						previousValue.Account = null;
-					}
-					this._Food.Entity = value;
-					if ((value != null))
-					{
-						value.Account = this;
-					}
-					this.SendPropertyChanged("Food");
 				}
 			}
 		}
@@ -211,7 +212,365 @@ namespace BodyLog.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Foods")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class Dishes_Foods
+	{
+		
+		private int _fk_Dishes;
+		
+		private int _fk_Food;
+		
+		public Dishes_Foods()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fk_Dishes")]
+		public int fk_Dishes
+		{
+			get
+			{
+				return this._fk_Dishes;
+			}
+			set
+			{
+				if ((this._fk_Dishes != value))
+				{
+					this._fk_Dishes = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fk_Food")]
+		public int fk_Food
+		{
+			get
+			{
+				return this._fk_Food;
+			}
+			set
+			{
+				if ((this._fk_Food != value))
+				{
+					this._fk_Food = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class Dishes : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _name;
+		
+		private System.DateTime _date;
+		
+		private float _calories;
+		
+		private int _fkDishes_Categories;
+		
+		private EntityRef<Dishes_Categories> _Dishes_Categories;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
+    partial void OncaloriesChanging(float value);
+    partial void OncaloriesChanged();
+    partial void OnfkDishes_CategoriesChanging(int value);
+    partial void OnfkDishes_CategoriesChanged();
+    #endregion
+		
+		public Dishes()
+		{
+			this._Dishes_Categories = default(EntityRef<Dishes_Categories>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_calories")]
+		public float calories
+		{
+			get
+			{
+				return this._calories;
+			}
+			set
+			{
+				if ((this._calories != value))
+				{
+					this.OncaloriesChanging(value);
+					this.SendPropertyChanging();
+					this._calories = value;
+					this.SendPropertyChanged("calories");
+					this.OncaloriesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fkDishes_Categories")]
+		public int fkDishes_Categories
+		{
+			get
+			{
+				return this._fkDishes_Categories;
+			}
+			set
+			{
+				if ((this._fkDishes_Categories != value))
+				{
+					if (this._Dishes_Categories.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfkDishes_CategoriesChanging(value);
+					this.SendPropertyChanging();
+					this._fkDishes_Categories = value;
+					this.SendPropertyChanged("fkDishes_Categories");
+					this.OnfkDishes_CategoriesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dishes_Categories_Dishes", Storage="_Dishes_Categories", ThisKey="fkDishes_Categories", OtherKey="id", IsForeignKey=true)]
+		public Dishes_Categories Dishes_Categories
+		{
+			get
+			{
+				return this._Dishes_Categories.Entity;
+			}
+			set
+			{
+				Dishes_Categories previousValue = this._Dishes_Categories.Entity;
+				if (((previousValue != value) 
+							|| (this._Dishes_Categories.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Dishes_Categories.Entity = null;
+						previousValue.Dishes.Remove(this);
+					}
+					this._Dishes_Categories.Entity = value;
+					if ((value != null))
+					{
+						value.Dishes.Add(this);
+						this._fkDishes_Categories = value.id;
+					}
+					else
+					{
+						this._fkDishes_Categories = default(int);
+					}
+					this.SendPropertyChanged("Dishes_Categories");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
+	public partial class Dishes_Categories : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _name;
+		
+		private EntitySet<Dishes> _Dishes;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    #endregion
+		
+		public Dishes_Categories()
+		{
+			this._Dishes = new EntitySet<Dishes>(new Action<Dishes>(this.attach_Dishes), new Action<Dishes>(this.detach_Dishes));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Dishes_Categories_Dishes", Storage="_Dishes", ThisKey="id", OtherKey="fkDishes_Categories")]
+		public EntitySet<Dishes> Dishes
+		{
+			get
+			{
+				return this._Dishes;
+			}
+			set
+			{
+				this._Dishes.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Dishes(Dishes entity)
+		{
+			this.SendPropertyChanging();
+			entity.Dishes_Categories = this;
+		}
+		
+		private void detach_Dishes(Dishes entity)
+		{
+			this.SendPropertyChanging();
+			entity.Dishes_Categories = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
 	public partial class Food : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -223,28 +582,32 @@ namespace BodyLog.Models
 		
 		private System.Nullable<double> _calories;
 		
-		private EntityRef<Account> _Account;
+		private int _fkFood_Categories;
+		
+		private EntityRef<Food_Categories> _Food_Categories;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
     partial void OncaloriesChanging(System.Nullable<double> value);
     partial void OncaloriesChanged();
+    partial void OnfkFood_CategoriesChanging(int value);
+    partial void OnfkFood_CategoriesChanged();
     #endregion
 		
 		public Food()
 		{
-			this._Account = default(EntityRef<Account>);
+			this._Food_Categories = default(EntityRef<Food_Categories>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Id", Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
 		{
 			get
 			{
@@ -254,15 +617,11 @@ namespace BodyLog.Models
 			{
 				if ((this._Id != value))
 				{
-					if (this._Account.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdChanging(value);
+					this.OnidChanging(value);
 					this.SendPropertyChanging();
 					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
@@ -307,36 +666,60 @@ namespace BodyLog.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Food", Storage="_Account", ThisKey="Id", OtherKey="Id", IsForeignKey=true)]
-		public Account Account
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fkFood_Categories")]
+		public int fkFood_Categories
 		{
 			get
 			{
-				return this._Account.Entity;
+				return this._fkFood_Categories;
 			}
 			set
 			{
-				Account previousValue = this._Account.Entity;
+				if ((this._fkFood_Categories != value))
+				{
+					if (this._Food_Categories.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnfkFood_CategoriesChanging(value);
+					this.SendPropertyChanging();
+					this._fkFood_Categories = value;
+					this.SendPropertyChanged("fkFood_Categories");
+					this.OnfkFood_CategoriesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Food_Categories_Food", Storage="_Food_Categories", ThisKey="fkFood_Categories", OtherKey="id", IsForeignKey=true)]
+		public Food_Categories Food_Categories
+		{
+			get
+			{
+				return this._Food_Categories.Entity;
+			}
+			set
+			{
+				Food_Categories previousValue = this._Food_Categories.Entity;
 				if (((previousValue != value) 
-							|| (this._Account.HasLoadedOrAssignedValue == false)))
+							|| (this._Food_Categories.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Account.Entity = null;
-						previousValue.Food = null;
+						this._Food_Categories.Entity = null;
+						previousValue.Foods.Remove(this);
 					}
-					this._Account.Entity = value;
+					this._Food_Categories.Entity = value;
 					if ((value != null))
 					{
-						value.Food = this;
-						this._Id = value.Id;
+						value.Foods.Add(this);
+						this._fkFood_Categories = value.id;
 					}
 					else
 					{
-						this._Id = default(int);
+						this._fkFood_Categories = default(int);
 					}
-					this.SendPropertyChanged("Account");
+					this.SendPropertyChanged("Food_Categories");
 				}
 			}
 		}
@@ -363,29 +746,116 @@ namespace BodyLog.Models
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="")]
-	public partial class Test
+	public partial class Food_Categories : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private string _test;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		public Test()
+		private int _id;
+		
+		private string _Name;
+		
+		private EntitySet<Food> _Foods;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Food_Categories()
 		{
+			this._Foods = new EntitySet<Food>(new Action<Food>(this.attach_Foods), new Action<Food>(this.detach_Foods));
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", CanBeNull=false)]
-		public string test
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", IsPrimaryKey=true)]
+		public int id
 		{
 			get
 			{
-				return this._test;
+				return this._id;
 			}
 			set
 			{
-				if ((this._test != value))
+				if ((this._id != value))
 				{
-					this._test = value;
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Food_Categories_Food", Storage="_Foods", ThisKey="id", OtherKey="fkFood_Categories")]
+		public EntitySet<Food> Foods
+		{
+			get
+			{
+				return this._Foods;
+			}
+			set
+			{
+				this._Foods.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Foods(Food entity)
+		{
+			this.SendPropertyChanging();
+			entity.Food_Categories = this;
+		}
+		
+		private void detach_Foods(Food entity)
+		{
+			this.SendPropertyChanging();
+			entity.Food_Categories = null;
 		}
 	}
 }
