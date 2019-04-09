@@ -289,8 +289,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\FoodDiaryView.cshtml" />
     <Content Include="Views\Information.cshtml" />
-    <Content Include="Views\Home\Foods.cshtml" />
-    <Content Include="Views\Home\AddProductForm.cshtml" />
     <Content Include="Views\Home\AddProduct.cshtml" />
     <Content Include="Views\Home\ViewProducts.cshtml" />
   </ItemGroup>

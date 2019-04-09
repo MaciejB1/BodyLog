@@ -25,11 +25,6 @@ namespace BodyLog.Controllers
             return View(foods);
         }
 
-        public ActionResult AddProductForm()
-        {
-            return View();
-        }
-
         public ActionResult AddProduct()
         {
             ViewBag.Message = "Add Product";
@@ -44,8 +39,9 @@ namespace BodyLog.Controllers
         {
             if (ModelState.IsValid)
             {
-                int RecordCreated = ProductsProcessor.AddProduct(model.Name, model.Calories);
-                return RedirectToAction("Index");
+                int RecordCreated = ProductsProcessor.AddProduct(model.Name, model.Calories, 
+                    model.Proteins, model.Carbohydrates, model.Fats);
+                return RedirectToAction("ViewProducts");
             }
 
             return View();
@@ -71,7 +67,10 @@ namespace BodyLog.Controllers
                 products.Add(new ProductModel
                 {
                     Name = row.Name,
-                    Calories = row.Calories
+                    Calories = row.Calories,
+                    Proteins = row.Proteins,
+                    Carbohydrates = row.Carbohydrates,
+                    Fats = row.Fats
                 });
             }
 

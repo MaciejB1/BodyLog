@@ -17,6 +17,15 @@
         <th>
             @Html.DisplayNameFor(model => model.Calories)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Proteins)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Carbohydrates)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fats)
+        </th>
         <th></th>
     </tr>
 
@@ -29,8 +38,16 @@
             @Html.DisplayFor(modelItem => item.Calories)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Proteins)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Carbohydrates)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fats)
+        </td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
