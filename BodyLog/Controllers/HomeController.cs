@@ -17,14 +17,6 @@ namespace BodyLog.Controllers
             return View();
         }
 
-        public ActionResult Foods()
-        {
-            var dataContext = new BodyLogDataContext();
-            var foods = from m in dataContext.Foods select m;
-
-            return View(foods);
-        }
-
         public ActionResult AddProduct()
         {
             ViewBag.Message = "Add Product";
@@ -75,6 +67,19 @@ namespace BodyLog.Controllers
             }
 
             return View(products);
+        }
+        
+        [HttpPost]
+        public ActionResult EditProduct(ProductModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int RecordCreated = ProductsProcessor.EditProduct(model.Name, model.Calories,
+                    model.Proteins, model.Carbohydrates, model.Fats, model.Id);
+                return RedirectToAction("ViewProducts");
+            }
+
+            return View();
         }
 
     }

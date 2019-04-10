@@ -8,6 +8,7 @@ namespace DataLibrary.Models
 {
     public class ProductsModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public float Calories { get; set; }
         public float Proteins { get; set; }

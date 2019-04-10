@@ -8,6 +8,8 @@ namespace BodyLog.Models
 {
     public class ProductModel
     {
+        public int Id { get; set; }
+
         [Display(Name = "Nazwa produktu")]
         [Required(ErrorMessage = "Wprowadz nazwe produktu")]
         public string Name { get; set; }

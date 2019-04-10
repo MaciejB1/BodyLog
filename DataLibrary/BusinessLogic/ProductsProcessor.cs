@@ -28,6 +28,25 @@ namespace DataLibrary.BusinessLogic
             return SqlDataAccess.SaveData(sql, data);
         }
 
+        public static int EditProduct(string name, float calories, float proteins,
+            float carbohydrates, float fats, int id)
+        {
+            ProductsModel data = new ProductsModel
+            {
+                Name = name,
+                Calories = calories,
+                Proteins = proteins,
+                Carbohydrates = carbohydrates,
+                Fats = fats
+            };
+
+            string sql = @"UPDATE Products set calories = @Calories, name = @Name, 
+                    proteins = @proteins, carbohydrates = @Carbohydrates, fats = @Fats
+                    where id = @id;";
+
+            return SqlDataAccess.SaveData(sql, data);
+        }
+
         public static List<ProductsModel> LoadProducts()
         {
             string sql = @"select name, calories, proteins, carbohydrates, fats from Products;";
