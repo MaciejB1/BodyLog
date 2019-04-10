@@ -20,10 +20,10 @@
         <elementListCompartment Id="0b5eb74f-0bba-4ca5-834a-d3532b5ef2b1" absoluteBounds="5.265, 1.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a5cc57f1-d545-4f61-ac6a-1e4411179c6f" absoluteBounds="5.125, 5.875, 2, 1.1939925130208327">
+    <classShape Id="a5cc57f1-d545-4f61-ac6a-1e4411179c6f" absoluteBounds="5.125, 5.875, 2, 1.3862939453124996">
       <DataClassMoniker Name="/BodyLogDataContext/Dishes_Foods" />
       <nestedChildShapes>
-        <elementListCompartment Id="46d043ce-af14-4928-9c57-f9e105dcf576" absoluteBounds="5.14, 6.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="46d043ce-af14-4928-9c57-f9e105dcf576" absoluteBounds="5.14, 6.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="133f9707-8020-4150-80cf-1553e2693bd2" absoluteBounds="5.25, 8.375, 2, 1.7708968098958344">
@@ -52,14 +52,14 @@
         <classShapeMoniker Id="133f9707-8020-4150-80cf-1553e2693bd2" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.1875 : 8.375); (6.1875 : 7.06899251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.1875 : 8.375); (6.1875 : 7.2612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BodyLogDataContext/Dishes/Dishes_Dishes_Foods" />
       <nodes>
         <classShapeMoniker Id="133f9707-8020-4150-80cf-1553e2693bd2" />
         <classShapeMoniker Id="a5cc57f1-d545-4f61-ac6a-1e4411179c6f" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.1875 : 4.95359537760417); (6.1875 : 5.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.1875 : 4.95359537760417); (6.1875 : 5.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/BodyLogDataContext/Food/Food_Dishes_Foods" />
       <nodes>
         <classShapeMoniker Id="8ff31e6a-7f5f-40df-bffb-82283e97b18a" />

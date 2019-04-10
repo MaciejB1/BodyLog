@@ -10,6 +10,7 @@
     <Type Name="Dishes_Foods">
       <Column Name="fk_Dishes" Type="System.Int32" CanBeNull="false" />
       <Column Name="fk_Food" Type="System.Int32" CanBeNull="false" />
+      <Column Member="weight" Type="System.Single" CanBeNull="false" />
       <Association Name="Dishes_Dishes_Foods" Member="Dishes" ThisKey="fk_Dishes" OtherKey="id" Type="Dishes" IsForeignKey="true" />
       <Association Name="Food_Dishes_Foods" Member="Food" ThisKey="fk_Food" OtherKey="id" Type="Food" IsForeignKey="true" />
     </Type>

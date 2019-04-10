@@ -220,6 +220,8 @@ namespace BodyLog.Models
 		
 		private int _fk_Food;
 		
+		private float _weight;
+		
 		public Dishes_Foods()
 		{
 		}
@@ -252,6 +254,22 @@ namespace BodyLog.Models
 				if ((this._fk_Food != value))
 				{
 					this._fk_Food = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_weight")]
+		public float weight
+		{
+			get
+			{
+				return this._weight;
+			}
+			set
+			{
+				if ((this._weight != value))
+				{
+					this._weight = value;
 				}
 			}
 		}
