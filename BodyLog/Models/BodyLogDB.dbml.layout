@@ -1,31 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Accounts">
-  <DataContextMoniker Name="/AccountsDataContext" />
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.25, 10.375" name="Accounts">
+  <DataContextMoniker Name="/BodyLogDataContext" />
   <nestedChildShapes>
-    <classShape Id="be45a2f7-ecae-445d-8b36-15008bb2429c" absoluteBounds="5.75, 2.625, 2, 1.1939925130208333">
-      <DataClassMoniker Name="/AccountsDataContext/Account" />
+    <classShape Id="be45a2f7-ecae-445d-8b36-15008bb2429c" absoluteBounds="10, 5.375, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/BodyLogDataContext/Account" />
       <nestedChildShapes>
-        <elementListCompartment Id="6e03bc2d-f897-4184-9716-7fc3743d58ed" absoluteBounds="5.7650000000000006, 3.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6e03bc2d-f897-4184-9716-7fc3743d58ed" absoluteBounds="10.015, 5.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8ff31e6a-7f5f-40df-bffb-82283e97b18a" absoluteBounds="2.25, 2.75, 2, 1.3862939453125">
-      <DataClassMoniker Name="/AccountsDataContext/Food" />
+    <classShape Id="8ff31e6a-7f5f-40df-bffb-82283e97b18a" absoluteBounds="5.25, 3.375, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/BodyLogDataContext/Food" />
       <nestedChildShapes>
-        <elementListCompartment Id="e004397c-6838-4da0-8f79-d0777929b822" absoluteBounds="2.2649999999999997, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e004397c-6838-4da0-8f79-d0777929b822" absoluteBounds="5.2650000000000006, 3.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.75 : 3.28449625651042); (4.25 : 3.28449625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/AccountsDataContext/Account/Account_Food" />
+    <classShape Id="197d0983-786a-41a8-b437-0b6a9c39a178" absoluteBounds="5.25, 0.625, 2, 1.1939925130208331">
+      <DataClassMoniker Name="/BodyLogDataContext/Food_Categories" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0b5eb74f-0bba-4ca5-834a-d3532b5ef2b1" absoluteBounds="5.265, 1.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a5cc57f1-d545-4f61-ac6a-1e4411179c6f" absoluteBounds="5.125, 5.875, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/BodyLogDataContext/Dishes_Foods" />
+      <nestedChildShapes>
+        <elementListCompartment Id="46d043ce-af14-4928-9c57-f9e105dcf576" absoluteBounds="5.14, 6.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="133f9707-8020-4150-80cf-1553e2693bd2" absoluteBounds="5.25, 8.375, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/BodyLogDataContext/Dishes" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc29875a-a842-4f1a-95d9-0be6e690cdca" absoluteBounds="5.2650000000000006, 8.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="03326fe4-c579-4d42-9e0c-77f48f237f56" absoluteBounds="9.25, 8.625, 2, 1.1939925130208327">
+      <DataClassMoniker Name="/BodyLogDataContext/Dishes_Categories" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1610f1c2-09a4-49bf-88fb-49fa9affc70d" absoluteBounds="9.265, 9.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.25 : 1.81899251302083); (6.25 : 3.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BodyLogDataContext/Food_Categories/Food_Categories_Food" />
       <nodes>
-        <classShapeMoniker Id="be45a2f7-ecae-445d-8b36-15008bb2429c" />
+        <classShapeMoniker Id="197d0983-786a-41a8-b437-0b6a9c39a178" />
         <classShapeMoniker Id="8ff31e6a-7f5f-40df-bffb-82283e97b18a" />
       </nodes>
     </associationConnector>
-    <classShape Id="40403686-c5b6-473c-bcd8-13f74c02b1b5" absoluteBounds="1.75, 1.25, 2, 1.0016910807291666">
-      <DataClassMoniker Name="/AccountsDataContext/Test" />
-      <nestedChildShapes>
-        <elementListCompartment Id="27b7f655-d83f-45f7-abb0-0dd5476fa1c1" absoluteBounds="1.7650000000000001, 1.71, 1.9700000000000002, 0.44169108072916663" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
+    <associationConnector edgePoints="[(9.25 : 9.22199625651042); (7.25 : 9.22199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BodyLogDataContext/Dishes_Categories/Dishes_Categories_Dishes" />
+      <nodes>
+        <classShapeMoniker Id="03326fe4-c579-4d42-9e0c-77f48f237f56" />
+        <classShapeMoniker Id="133f9707-8020-4150-80cf-1553e2693bd2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.1875 : 8.375); (6.1875 : 7.06899251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BodyLogDataContext/Dishes/Dishes_Dishes_Foods" />
+      <nodes>
+        <classShapeMoniker Id="133f9707-8020-4150-80cf-1553e2693bd2" />
+        <classShapeMoniker Id="a5cc57f1-d545-4f61-ac6a-1e4411179c6f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.1875 : 4.95359537760417); (6.1875 : 5.875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/BodyLogDataContext/Food/Food_Dishes_Foods" />
+      <nodes>
+        <classShapeMoniker Id="8ff31e6a-7f5f-40df-bffb-82283e97b18a" />
+        <classShapeMoniker Id="a5cc57f1-d545-4f61-ac6a-1e4411179c6f" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
