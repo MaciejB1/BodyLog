@@ -40,30 +40,6 @@ namespace BodyLog.Controllers
             
         }
 
-        public ActionResult AddDiaryLog()
-        {
-            ViewBag.Message = "Add Dialy Log";
-
-            return View();
-
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddDiaryLog(DailyModel model)
-        {
-            if (ModelState.IsValid)
-            {
-               // int RecordCreated = ProductsProcessor.AddProduct(model.Name, model.Calories);
-              //  return RedirectToAction("Index");
-            }
-
-            return View();
-
-        }
-
-
-
         public ActionResult FoodDiaryView()
         {
             ViewBag.Message = "Choose an option";
@@ -92,8 +68,7 @@ namespace BodyLog.Controllers
 
             return View(products);
         }
-        
-        [HttpPost]
+
         public ActionResult EditProduct(ProductModel model)
         {
             if (ModelState.IsValid)

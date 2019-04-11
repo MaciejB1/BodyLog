@@ -42,7 +42,7 @@ namespace DataLibrary.BusinessLogic
 
             string sql = @"UPDATE Products set calories = @Calories, name = @Name, 
                     proteins = @proteins, carbohydrates = @Carbohydrates, fats = @Fats
-                    where id = @id;";
+                    where id = (select id from products where name = @Name);";
 
             return SqlDataAccess.SaveData(sql, data);
         }
