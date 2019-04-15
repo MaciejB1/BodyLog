@@ -49,7 +49,7 @@ namespace DataLibrary.BusinessLogic
 
         public static List<ProductsModel> LoadProducts()
         {
-            string sql = @"select name, calories, proteins, carbohydrates, fats from Products;";
+            string sql = @"select id, name, calories, proteins, carbohydrates, fats from Products;";
 
             return SqlDataAccess.LoadData<ProductsModel>(sql);
         }
