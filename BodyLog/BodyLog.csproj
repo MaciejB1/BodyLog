@@ -201,6 +201,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -290,9 +291,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\FoodDiaryView.cshtml" />
     <Content Include="Views\Information.cshtml" />
-    <Content Include="Views\Home\AddProduct.cshtml" />
-    <Content Include="Views\Home\ViewProducts.cshtml" />
-    <Content Include="Views\Home\EditProductView.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />
@@ -310,12 +313,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataLibrary\DataLibrary.csproj">
-      <Project>{c70b46ec-c5ad-455c-8f3b-2d1c29e9670e}</Project>
-      <Name>DataLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
