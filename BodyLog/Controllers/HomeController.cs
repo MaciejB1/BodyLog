@@ -17,19 +17,6 @@ namespace BodyLog.Controllers
             return View();
         }
 
-        public ActionResult Foods()
-        {
-            var dataContext = new BodyLogDataContext();
-            var foods = from m in dataContext.Foods select m;
-
-            return View(foods);
-        }
-
-        public ActionResult AddProductForm()
-        {
-            return View();
-        }
-
         public ActionResult AddProduct()
         {
             ViewBag.Message = "Add Product";
@@ -44,37 +31,14 @@ namespace BodyLog.Controllers
         {
             if (ModelState.IsValid)
             {
-                int RecordCreated = ProductsProcessor.AddProduct(model.Name, model.Calories);
-                return RedirectToAction("Index");
+                int RecordCreated = ProductsProcessor.AddProduct(model.Name, model.Calories, 
+                    model.Proteins, model.Carbohydrates, model.Fats);
+                return RedirectToAction("ViewProducts");
             }
 
             return View();
             
         }
-
-        public ActionResult AddDiaryLog()
-        {
-            ViewBag.Message = "Add Dialy Log";
-
-            return View();
-
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddDiaryLog(DailyModel model)
-        {
-            if (ModelState.IsValid)
-            {
-               // int RecordCreated = ProductsProcessor.AddProduct(model.Name, model.Calories);
-              //  return RedirectToAction("Index");
-            }
-
-            return View();
-
-        }
-
-
 
         public ActionResult FoodDiaryView()
         {
@@ -95,11 +59,26 @@ namespace BodyLog.Controllers
                 products.Add(new ProductModel
                 {
                     Name = row.Name,
-                    Calories = row.Calories
+                    Calories = row.Calories,
+                    Proteins = row.Proteins,
+                    Carbohydrates = row.Carbohydrates,
+                    Fats = row.Fats
                 });
             }
 
             return View(products);
+        }
+
+        public ActionResult EditProduct(ProductModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int RecordCreated = ProductsProcessor.EditProduct(model.Name, model.Calories,
+                    model.Proteins, model.Carbohydrates, model.Fats, model.Id);
+                return RedirectToAction("ViewProducts");
+            }
+
+            return View();
         }
 
     }
