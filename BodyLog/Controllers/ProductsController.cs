@@ -12,7 +12,7 @@ namespace BodyLog.Controllers
 {
     public class ProductsController : Controller
     {
-        private ProductDBContext db = new ProductDBContext();
+        private MainDB db = new MainDB();
 
         // GET: Products
         public ActionResult Index()

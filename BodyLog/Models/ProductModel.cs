@@ -32,7 +32,7 @@ namespace BodyLog.Models
         public float Fats { get; set; }
     }
 
-    public class ProductDBContext : DbContext
+    public class MainDB : DbContext
     {
         public DbSet<Product> Products { get; set; }
     }
