@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace BodyLog.Models
 {
-    public class ProductModel
+    public class Product
     {
         public int Id { get; set; }
 
@@ -29,5 +30,10 @@ namespace BodyLog.Models
         [Display(Name = "Tłuszcze na 100g")]
         [Required(ErrorMessage = "Wprowadz tłuszcze")]
         public float Fats { get; set; }
+    }
+
+    public class ProductDBContext : DbContext
+    {
+        public DbSet<Product> Products { get; set; }
     }
 }
