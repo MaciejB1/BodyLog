@@ -10,4 +10,5 @@ public class MainDB : DbContext
 {
     public DbSet<Product> Products { get; set; }
     public DbSet<Dishes>  Dishes { get; set; }
+    public DbSet<Dishes_Products> Dishes_Products { get; set; }
 }

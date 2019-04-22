@@ -200,6 +200,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
+    <Compile Include="Controllers\Dishes_ProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -208,6 +209,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DishesModel.cs" />
+    <Compile Include="Models\Dishes_ProductsModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -287,6 +289,11 @@
     <Content Include="Views\Dishes\Details.cshtml" />
     <Content Include="Views\Dishes\Edit.cshtml" />
     <Content Include="Views\Dishes\Index.cshtml" />
+    <Content Include="Views\Dishes_Products\Create.cshtml" />
+    <Content Include="Views\Dishes_Products\Delete.cshtml" />
+    <Content Include="Views\Dishes_Products\Details.cshtml" />
+    <Content Include="Views\Dishes_Products\Edit.cshtml" />
+    <Content Include="Views\Dishes_Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />
