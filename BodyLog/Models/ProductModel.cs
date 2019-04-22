@@ -9,6 +9,7 @@ namespace BodyLog.Models
 {
     public class Product
     {
+        [Key]
         public int Id { get; set; }
 
         [Display(Name = "Nazwa produktu")]
