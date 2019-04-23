@@ -16,9 +16,17 @@ namespace BodyLog.Controllers
         private MainDB db = new MainDB();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Products.ToList());
+            var products = from p in db.Products
+                         select p;
+
+            if (!String.IsNullOrEmpty(searchString))        
+            {
+                products = products.Where(s => s.Name.Contains(searchString));
+            }
+
+            return View(products);
         }
 
         // GET: Products/Details/5
