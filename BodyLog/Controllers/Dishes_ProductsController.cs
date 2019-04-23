@@ -38,15 +38,28 @@ namespace BodyLog.Controllers
         // GET: Dishes_Products/Create
         public ActionResult Create()
         {
+            ProductModel product = new ProductModel(); 
+            product.Products = db.Products.ToList();
+          
+           
+            return View(product);
+        }
+
+       
+        [HttpPost]
+        public ActionResult Create(ProductModel list, Dishes dishes)
+        {
+            var selectedProducts = list.Products.Where(x => x.isChecked == true).ToList<Product>();
+
+
+
             return View();
         }
 
-        // POST: Dishes_Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Dishes,Id_Product,gram")] Dishes_Products dishes_Products)
+        public ActionResult Create2([Bind(Include = "Id_Dishes,Id_Product,gram")] Dishes_Products dishes_Products)
         {
             if (ModelState.IsValid)
             {

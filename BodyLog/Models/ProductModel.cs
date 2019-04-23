@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -38,6 +39,16 @@ namespace BodyLog.Models
         [Display(Name = "Tłuszcze na 100g")]
         [Required(ErrorMessage = "Wprowadz tłuszcze")]
         public float Fats { get; set; }
+
+        [NotMapped]
+        public bool isChecked { get; set; }
     }
+
+    public class ProductModel
+    {
+        public List<Product> Products { get; set; }
+        public Dishes Dishes { get; set; }
+    }
+
 
 }
