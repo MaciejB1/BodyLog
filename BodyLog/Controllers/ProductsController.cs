@@ -16,9 +16,17 @@ namespace BodyLog.Controllers
         private MainDB db = new MainDB();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(db.Products.ToList());
+            var products = from p in db.Products
+                         select p;
+
+            if (!String.IsNullOrEmpty(searchString))        
+            {
+                products = products.Where(s => s.Name.Contains(searchString));
+            }
+
+            return View(products);
         }
 
         // GET: Products/Details/5
@@ -123,6 +131,12 @@ namespace BodyLog.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public JsonResult IsNameExists(string Name)
+        {
+            //check if any of the Name matches the Name specified in the Parameter using the ANY extension method.  
+            return Json(!db.Products.Any(x => x.Name == Name), JsonRequestBehavior.AllowGet);
         }
     }
 }
