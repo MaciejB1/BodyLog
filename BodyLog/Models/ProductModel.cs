@@ -4,9 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BodyLog.Models
 {
+    [MetadataType(typeof(Product))]
+    public partial class User
+    {
+    }
+
     public class Product
     {
         [Key]
@@ -14,6 +20,7 @@ namespace BodyLog.Models
 
         [Display(Name = "Nazwa produktu")]
         [Required(ErrorMessage = "Wprowadz nazwe produktu")]
+        [Remote("IsNameExists", "Products", ErrorMessage = "Produkt o takiej nazwie już istnieje")]
         public string Name { get; set; }
 
         [Display(Name = "Kalorie na 100g")]

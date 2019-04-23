@@ -132,5 +132,11 @@ namespace BodyLog.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public JsonResult IsNameExists(string Name)
+        {
+            //check if any of the Name matches the Name specified in the Parameter using the ANY extension method.  
+            return Json(!db.Products.Any(x => x.Name == Name), JsonRequestBehavior.AllowGet);
+        }
     }
 }
