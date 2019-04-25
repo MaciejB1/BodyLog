@@ -41,13 +41,20 @@ namespace BodyLog.Models
         public float Fats { get; set; }
 
         [NotMapped]
-        public bool isChecked { get; set; }
+        public bool IsChecked { get; set; }
+
+        [Display(Name = "Ilość")]
+        [Required(ErrorMessage = "Wprowadz ilość")]
+        [NotMapped]
+        public float Volume { get; set; } 
     }
 
     public class ProductModel
     {
         public List<Product> Products { get; set; }
         public Dishes Dishes { get; set; }
+        public List<Dishes> DishesList { get; set; }
+        public List<Dishes_Products> Dishes_Products { get; set; }
     }
 
 

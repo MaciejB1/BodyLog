@@ -14,13 +14,17 @@ namespace BodyLog.Controllers
     {
         private MainDB db = new MainDB();
 
-        // GET: Dishes_Products
+
         public ActionResult Index()
         {
-            return View(db.Dishes_Products.ToList());
+            ProductModel product = new ProductModel();
+            product.Products = db.Products.ToList();
+            product.DishesList = db.Dishes.ToList();
+            product.Dishes_Products = db.Dishes_Products.ToList();
+
+            return View(product);
         }
 
-        // GET: Dishes_Products/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,25 +39,58 @@ namespace BodyLog.Controllers
             return View(dishes_Products);
         }
 
-        // GET: Dishes_Products/Create
         public ActionResult Create()
         {
             ProductModel product = new ProductModel(); 
             product.Products = db.Products.ToList();
           
-           
             return View(product);
         }
 
-       
+
         [HttpPost]
         public ActionResult Create(ProductModel list, Dishes dishes)
         {
-            var selectedProducts = list.Products.Where(x => x.isChecked == true).ToList<Product>();
+            var selectedProducts = list.Products.Where(x => x.IsChecked == true).ToList<Product>();
 
 
+            float calories = 0, carbo = 0, proteins = 0, fats = 0;
 
-            return View();
+            foreach (Product p in selectedProducts)
+            {
+                calories += p.Calories * p.Volume / 100;
+                carbo += p.Carbohydrates * p.Volume / 100;
+                proteins += p.Proteins * p.Volume / 100;
+                fats += p.Fats * p.Volume / 100;
+            }
+
+            dishes.Calories = calories;
+            dishes.Carbohydrates = carbo;
+            dishes.Proteins = proteins;
+            dishes.Fats = fats;
+            dishes.Date = System.DateTime.Now;
+
+            db.Dishes.Add(dishes);
+            db.SaveChanges();
+
+            int id = dishes.Id;
+
+
+           
+            foreach (Product p in selectedProducts) {
+                Dishes_Products dishesProducts = new Dishes_Products();
+                dishesProducts.Id_Dishes = id;
+
+                dishesProducts.Id_Product = p.Id;
+                dishesProducts.gram = p.Volume;
+                db.Dishes_Products.Add(dishesProducts);
+                db.SaveChanges();
+            }
+
+            
+
+
+            return RedirectToAction("Index", "Dishes");
         }
 
 
@@ -71,7 +108,7 @@ namespace BodyLog.Controllers
             return View(dishes_Products);
         }
 
-        // GET: Dishes_Products/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,9 +123,6 @@ namespace BodyLog.Controllers
             return View(dishes_Products);
         }
 
-        // POST: Dishes_Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id_Dishes,Id_Product,gram")] Dishes_Products dishes_Products)
@@ -102,7 +136,7 @@ namespace BodyLog.Controllers
             return View(dishes_Products);
         }
 
-        // GET: Dishes_Products/Delete/5
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,7 +151,6 @@ namespace BodyLog.Controllers
             return View(dishes_Products);
         }
 
-        // POST: Dishes_Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
