@@ -14,13 +14,11 @@ namespace BodyLog.Controllers
     {
         private MainDB db = new MainDB();
 
-        // GET: Dishes
         public ActionResult Index()
         {
             return View(db.Dishes.ToList());
         }
 
-        // GET: Dishes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -41,12 +39,10 @@ namespace BodyLog.Controllers
             return View();
         }
 
-        // POST: Dishes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Date,Calories")] Dishes dishes)
+        public ActionResult Create([Bind(Include = "Id,Name,Date,Calories,Proteins,Carbohydrates,Fats")] Dishes dishes)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +54,6 @@ namespace BodyLog.Controllers
             return View(dishes);
         }
 
-        // GET: Dishes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,12 +68,9 @@ namespace BodyLog.Controllers
             return View(dishes);
         }
 
-        // POST: Dishes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Date,Calories")] Dishes dishes)
+        public ActionResult Edit([Bind(Include = "Id,Name,Date,Calories,Proteins,Carbohydrates,Fats")] Dishes dishes)
         {
             if (ModelState.IsValid)
             {

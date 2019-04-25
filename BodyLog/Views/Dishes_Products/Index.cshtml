@@ -1,33 +1,38 @@
-﻿@model IEnumerable<BodyLog.Models.Dishes_Products>
+﻿@model BodyLog.Models.ProductModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dania z Produktów";
 }
 
-<h2>Index</h2>
+<h2>Dania stworzone z Twoich produktów!</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.gram)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.gram)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    <ul>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dishes.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Name)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Dishes_Products)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.DishesList.Find(o => o.Id == item.Id_Dishes).Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Products.Find(o => o.Id == item.Id_Product).Name)
+                </td>            
+            </tr>
+            }
+
+        </table>
+    </ul>
+
 
 </table>

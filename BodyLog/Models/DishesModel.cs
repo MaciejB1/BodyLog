@@ -17,11 +17,24 @@ namespace BodyLog.Models
         public string Name { get; set; }
 
         [Display(Name = "Data")]
-        public DateTime Date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? Date { get; set; }
 
         [Display(Name = "Liczba kalorii")]
-        [Required(ErrorMessage = "Wprowadź liczę Kalorii")]
+        [Required(ErrorMessage = "Wprow dź liczę Kalorii")]
         public float Calories { get; set; }
+
+        [Display(Name = "Białko w gramach")]
+        [Required(ErrorMessage = "Wprowadź białko")]
+        public float Proteins { get; set; }
+
+        [Display(Name = "Węglowodany w gramach")]
+        [Required(ErrorMessage = "Wprowadź węglowodany")]
+        public float Carbohydrates { get; set; }
+
+        [Display(Name = "Tłuszcze w gramach")]
+        [Required(ErrorMessage = "Wprowadź tłuszcze")]
+        public float Fats { get; set; }
     }
 
 }

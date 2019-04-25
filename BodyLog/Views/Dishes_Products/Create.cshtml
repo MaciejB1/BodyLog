@@ -1,10 +1,10 @@
 ﻿@model BodyLog.Models.ProductModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Stwórz Danie z Produktów!";
 }
 
-<h2>Create</h2>
+<h2>Stwórz Danie z Produktów!</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -14,28 +14,40 @@
 
 
     <div class="form-group">
-        <div class="form-group">
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
             @Html.LabelFor(model => model.Dishes.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Dishes.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Dishes.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-        <table>
+        <div class="row">
             @for (int i = 0; i < Model.Products.Count; i++)
             {
-                <td>
-                    @Html.CheckBoxFor(model => model.Products[i].isChecked)
+                <div class="col-sm-3" style="margin-top: 20px" >
+                    @Html.CheckBoxFor(model => model.Products[i].IsChecked)
                     <label>  @Model.Products[i].Name</label>
+
+
+
+                    @Html.EditorFor(model => model.Products[i].Volume, new { htmlAttributes = new { @class = "form-control", @placeholder = "ilosć w gramach"} })
+
+
                     @Html.HiddenFor(model => model.Products[i].Id)
-                </td>
+                    @Html.HiddenFor(model => model.Products[i].Calories)
+                    @Html.HiddenFor(model => model.Products[i].Proteins)
+                    @Html.HiddenFor(model => model.Products[i].Carbohydrates)
+                    @Html.HiddenFor(model => model.Products[i].Fats)
+                </div>
             }
 
-        </table>
-
-        <div class="col-md-offset-2 col-md-10">
+        </div>
+        <div class="col-md-12" style="margin: 30px 30px 30px 0px">
             <input type="submit" value="Dodaj" class="btn btn-default" />
         </div>
+    </div>
+    <div class="row">
+      
     </div>
 </div>
 }

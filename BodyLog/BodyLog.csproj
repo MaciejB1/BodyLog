@@ -300,16 +300,16 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Dishes\Create.cshtml" />
-    <Content Include="Views\Dishes\Delete.cshtml" />
-    <Content Include="Views\Dishes\Details.cshtml" />
-    <Content Include="Views\Dishes\Edit.cshtml" />
-    <Content Include="Views\Dishes\Index.cshtml" />
     <Content Include="Views\Dishes_Products\Create.cshtml" />
     <Content Include="Views\Dishes_Products\Delete.cshtml" />
     <Content Include="Views\Dishes_Products\Details.cshtml" />
     <Content Include="Views\Dishes_Products\Edit.cshtml" />
     <Content Include="Views\Dishes_Products\Index.cshtml" />
+    <Content Include="Views\Dishes\Create.cshtml" />
+    <Content Include="Views\Dishes\Delete.cshtml" />
+    <Content Include="Views\Dishes\Details.cshtml" />
+    <Content Include="Views\Dishes\Edit.cshtml" />
+    <Content Include="Views\Dishes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />
