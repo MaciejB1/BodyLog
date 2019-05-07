@@ -15,7 +15,7 @@ namespace BodyLog.Controllers
     {
         private MainDB db = new MainDB();
 
-        // GET: Products
+       
         public ActionResult Index(string searchString)
         {
             var products = from p in db.Products
@@ -29,7 +29,7 @@ namespace BodyLog.Controllers
             return View(products);
         }
 
-        // GET: Products/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,7 +44,7 @@ namespace BodyLog.Controllers
             return View(product);
         }
 
-        // GET: Products/Create
+        
         public ActionResult Create()
         {
             return View();
@@ -65,7 +65,7 @@ namespace BodyLog.Controllers
             return View(product);
         }
 
-        // GET: Products/Edit/5
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -94,7 +94,7 @@ namespace BodyLog.Controllers
             return View(product);
         }
 
-        // GET: Products/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +109,7 @@ namespace BodyLog.Controllers
             return View(product);
         }
 
-        // POST: Products/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -131,7 +131,6 @@ namespace BodyLog.Controllers
 
         public JsonResult IsNameExists(string Name)
         {
-            //check if any of the Name matches the Name specified in the Parameter using the ANY extension method.  
             return Json(!db.Products.Any(x => x.Name == Name), JsonRequestBehavior.AllowGet);
         }
     }
