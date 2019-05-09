@@ -57,9 +57,12 @@ namespace BodyLog.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if ((product.Carbohydrates + product.Proteins + product.Fats) <= 100.0)
+                {
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             return View(product);
