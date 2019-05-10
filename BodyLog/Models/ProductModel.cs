@@ -49,12 +49,13 @@ namespace BodyLog.Models
         public float Volume { get; set; } 
     }
 
-    public class ProductModel
+    public class GlobalModel
     {
         public List<Product> Products { get; set; }
         public Dishes Dishes { get; set; }
         public List<Dishes> DishesList { get; set; }
         public List<Dishes_Products> Dishes_Products { get; set; }
+     //   public List<Dishes_Products> Dishes_ProductsList { get; set; }
     }
 
 
