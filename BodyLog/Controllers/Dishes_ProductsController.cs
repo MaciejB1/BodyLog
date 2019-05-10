@@ -20,8 +20,9 @@ namespace BodyLog.Controllers
             GlobalModel global = new GlobalModel();
    
             global.Products = db.Products.ToList();
-            global.DishesList = db.Dishes.ToList();
+           
             global.Dishes_Products = db.Dishes_Products.ToList();
+            global.DishesList = db.Dishes.Where(dishes => db.Dishes_Products.ToList().Any(dp => dishes.Id == dp.Id_Dishes)).ToList<Dishes>();//.ToList<DishesList>(); ;
 
             return View(global);
         }
