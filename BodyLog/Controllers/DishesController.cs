@@ -33,7 +33,7 @@ namespace BodyLog.Controllers
             return View(dishes);
         }
 
-        // GET: Dishes/Create
+        
         public ActionResult Create()
         {
             return View();
@@ -81,7 +81,7 @@ namespace BodyLog.Controllers
             return View(dishes);
         }
 
-        // GET: Dishes/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -96,7 +96,7 @@ namespace BodyLog.Controllers
             return View(dishes);
         }
 
-        // POST: Dishes/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
