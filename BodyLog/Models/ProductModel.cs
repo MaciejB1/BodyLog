@@ -45,7 +45,7 @@ namespace BodyLog.Models
 
         [NotMapped]
         [MaxWeightOfProductsSum]
-        public bool weightValid { get; set; }       //prop only for valid
+        public byte weightValid { get; set; }       //prop only for valid
 
         [NotMapped]
         public bool IsChecked { get; set; }
@@ -63,6 +63,5 @@ namespace BodyLog.Models
         public List<Dishes> DishesList { get; set; }
         public List<Dishes_Products> Dishes_Products { get; set; }
     }
-
-
 }
+

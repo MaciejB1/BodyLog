@@ -65,7 +65,7 @@ namespace BodyLog.Controllers
             return View(product);
         }
 
-        
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(int? id)
         {
             if (id == null)

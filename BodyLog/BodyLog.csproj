@@ -231,6 +231,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DishesModel.cs" />
     <Compile Include="Models\Dishes_ProductsModel.cs" />
+    <Compile Include="Models\IsNameExist.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\MaxWeightOfProductsSum.cs" />
     <Compile Include="Models\ProductModel.cs" />
