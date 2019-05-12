@@ -30,15 +30,22 @@ namespace BodyLog.Models
 
         [Display(Name = "Białko na 100g")]
         [Required(ErrorMessage = "Wprowadz białko")]
+        [MinMaxWeightOfProductProteins]
         public float Proteins { get; set; }
 
         [Display(Name = "Węglowodany na 100g")]
         [Required(ErrorMessage = "Wprowadz węglowodany")]
+        [MinMaxWeightOfProductCarbohydrates]
         public float Carbohydrates { get; set; }
 
         [Display(Name = "Tłuszcze na 100g")]
         [Required(ErrorMessage = "Wprowadz tłuszcze")]
+        [MinMaxWeightOfProductFats]
         public float Fats { get; set; }
+
+        [NotMapped]
+        [MaxWeightOfProductsSum]
+        public bool weightValid { get; set; }       //prop only for valid
 
         [NotMapped]
         public bool IsChecked { get; set; }
