@@ -1,4 +1,9 @@
-﻿@model BodyLog.Models.Product
+﻿@using BodyLog.Models
+@model BodyLog.Models.Product
+
+@functions {
+    public string MaxWeightOfProductsSum { get; }
+}
 
 @{
     ViewBag.Title = "Dodaj produkt";
@@ -9,7 +14,7 @@
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Products"))
 {
     @Html.AntiForgeryToken()
 
@@ -60,6 +65,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Dodaj" class="btn btn-default" />
+                @Html.ValidationMessageFor(model => model.weightValid, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
