@@ -26,6 +26,7 @@ namespace BodyLog.Models
 
         [Display(Name = "Kalorie na 100g")]
         [Required(ErrorMessage = "Wprowadz kalorie")]
+        [OnlyPositiveNumberOfCalories]
         public float Calories { get; set; }
 
         [Display(Name = "Białko na 100g")]
