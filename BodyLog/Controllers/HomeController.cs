@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DataLibrary;
-using DataLibrary.BusinessLogic;
 
 namespace BodyLog.Controllers
 {
@@ -15,27 +13,6 @@ namespace BodyLog.Controllers
         {
             return View();
         }
-
-        public ActionResult Foods()
-        {
-            var dataContext = new BodyLogDataContext();
-            var foods = from m in dataContext.Foods select m;
-
-            return View(foods);
-        }
-
-        public ActionResult AddProductForm()
-        {
-            return View();
-        }
-
-       [HttpGet]
-       public void AddProduct()
-        {
-            
-            
-        }
-        
         
         public ActionResult FoodDiaryView()
         {
@@ -43,6 +20,12 @@ namespace BodyLog.Controllers
 
             return View();
         }
+
+        public ActionResult BodyView()
+        {
+            return View();
+        }
+
 
     }
 }

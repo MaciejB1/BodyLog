@@ -1,0 +1,32 @@
+﻿@model BodyLog.Models.Dishes_Products
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Usuń</h2>
+
+<h3>Czy jesteś pewny że chcesz usunać?</h3>
+<div>
+    <h4>Dishes_Products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.gram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gram)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -7,7 +7,6 @@ using Dapper;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-
 namespace DataLibrary.DataAccess
 {
     public static class SqlDataAccess
@@ -27,12 +26,10 @@ namespace DataLibrary.DataAccess
 
         public static int SaveData<T>(string sql, T data)
         {
-            //   using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            //   {
-            //       return cnn.Execute(sql, data);
-            //   }
-
-            return 0;
+            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
+            {
+                return cnn.Execute(sql, data);
+            }
         }
     }
 }

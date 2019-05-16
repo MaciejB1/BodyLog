@@ -8,9 +8,11 @@ namespace DataLibrary.Models
 {
     public class ProductsModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-        public int Calories { get; set; }
-        public int IdCategories { get; set; }
-        public int IdAccount { get; set; }
+        public float Calories { get; set; }
+        public float Proteins { get; set; }
+        public float Carbohydrates { get; set; }
+        public float Fats { get; set; }
     }
 }

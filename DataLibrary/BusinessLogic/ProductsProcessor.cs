@@ -10,26 +10,46 @@ namespace DataLibrary.BusinessLogic
 {
     public static class ProductsProcessor
     {
-        public static int AddProduct(string name, int calories,
-            int idCategories, int idAccount)
+        public static int AddProduct(string name, float calories, float proteins,
+            float carbohydrates, float fats)
         {
             ProductsModel data = new ProductsModel
             {
                 Name = name,
                 Calories = calories,
-                IdCategories = idCategories,
-                IdAccount = idAccount
+                Proteins = proteins,
+                Carbohydrates = carbohydrates,
+                Fats = fats
             };
 
-            string sql = @"INSERT INTO Food_Products (name, calories, Food_Categories_idFood_Categories, Account_idAccount)
-                            values(@Name, @Calories, @IdCategories, @IdAccount);";
+            string sql = @"INSERT INTO Products (name, calories, proteins, carbohydrates, fats)
+            values(@Name, @Calories, @Proteins, @Carbohydrates, @Fats);";
+
+            return SqlDataAccess.SaveData(sql, data);
+        }
+
+        public static int EditProduct(string name, float calories, float proteins,
+            float carbohydrates, float fats, int id)
+        {
+            ProductsModel data = new ProductsModel
+            {
+                Name = name,
+                Calories = calories,
+                Proteins = proteins,
+                Carbohydrates = carbohydrates,
+                Fats = fats
+            };
+
+            string sql = @"UPDATE Products set calories = @Calories, name = @Name, 
+                    proteins = @proteins, carbohydrates = @Carbohydrates, fats = @Fats
+                    where id = (select id from products where name = @Name);";
 
             return SqlDataAccess.SaveData(sql, data);
         }
 
         public static List<ProductsModel> LoadProducts()
         {
-            string sql = @"select name, calories, Food_Categories_idFood_Categories, Account_idAccount from Food_Products;";
+            string sql = @"select id, name, calories, proteins, carbohydrates, fats from Products;";
 
             return SqlDataAccess.LoadData<ProductsModel>(sql);
         }

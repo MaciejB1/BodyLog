@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BodyLog.Models.Body>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+
+@Html.ActionLink("Dodaj nowy", "Add")
+@using (Html.BeginForm())
+{
+    <p>
+        Nazwa: @Html.TextBox("SearchString")
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)kg
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
