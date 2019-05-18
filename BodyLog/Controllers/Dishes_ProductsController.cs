@@ -17,41 +17,30 @@ namespace BodyLog.Controllers
 
         public ActionResult Index()
         {
-            ProductModel product = new ProductModel();
-            product.Products = db.Products.ToList();
-            product.DishesList = db.Dishes.ToList();
-            product.Dishes_Products = db.Dishes_Products.ToList();
+            GlobalModel global = new GlobalModel();
+   
+            global.Products = db.Products.ToList();
+           
+            global.Dishes_Products = db.Dishes_Products.ToList();
+            global.DishesList = db.Dishes.Where(dishes => db.Dishes_Products.ToList().Any(dp => dishes.Id == dp.Id_Dishes)).ToList<Dishes>();//.ToList<DishesList>(); ;
 
-            return View(product);
-        }
-
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Dishes_Products dishes_Products = db.Dishes_Products.Find(id);
-            if (dishes_Products == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dishes_Products);
+            return View(global);
         }
 
         public ActionResult Create()
         {
-            ProductModel product = new ProductModel(); 
-            product.Products = db.Products.ToList();
+            GlobalModel global = new GlobalModel(); 
+            global.Products = db.Products.ToList();
           
-            return View(product);
+            return View(global);
         }
 
 
         [HttpPost]
-        public ActionResult Create(ProductModel list, Dishes dishes)
+        public ActionResult Create(GlobalModel list, Dishes dishes)
         {
-            var selectedProducts = list.Products.Where(x => x.IsChecked == true).ToList<Product>();
+
+            var selectedProducts = list.Products.Where(x => x.Volume > 0).ToList<Product>();
 
 
             float calories = 0, carbo = 0, proteins = 0, fats = 0;
@@ -111,29 +100,63 @@ namespace BodyLog.Controllers
 
         public ActionResult Edit(int? id)
         {
+            GlobalModel global = new GlobalModel();
+            global.Products = db.Products.ToList();
+            global.Dishes_Products = db.Dishes_Products.Where(x => x.Id_Dishes == id).ToList<Dishes_Products>();
+            global.DishesList = db.Dishes.Where(x => x.Id == id).ToList<Dishes>();
+          
             if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Dishes_Products dishes_Products = db.Dishes_Products.Find(id);
-            if (dishes_Products == null)
             {
                 return HttpNotFound();
             }
-            return View(dishes_Products);
+            return View(global);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_Dishes,Id_Product,gram")] Dishes_Products dishes_Products)
+        public ActionResult Edit(GlobalModel list, Dishes dishes)
         {
-            if (ModelState.IsValid)
+            var selectedProducts = list.Products.Where(x => x.Volume > 0).ToList<Product>();
+
+
+            float calories = 0, carbo = 0, proteins = 0, fats = 0;
+
+            foreach (Product p in selectedProducts)
             {
-                db.Entry(dishes_Products).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                calories += p.Calories * p.Volume / 100;
+                carbo += p.Carbohydrates * p.Volume / 100;
+                proteins += p.Proteins * p.Volume / 100;
+                fats += p.Fats * p.Volume / 100;
             }
-            return View(dishes_Products);
+
+            dishes.Calories = calories;
+            dishes.Carbohydrates = carbo;
+            dishes.Proteins = proteins;
+            dishes.Fats = fats;
+            dishes.Date = System.DateTime.Now;
+
+            db.Dishes.Add(dishes);
+            db.SaveChanges();
+
+            int id = dishes.Id;
+
+
+
+            foreach (Product p in selectedProducts)
+            {
+                Dishes_Products dishesProducts = new Dishes_Products();
+                dishesProducts.Id_Dishes = id;
+
+                dishesProducts.Id_Product = p.Id;
+                dishesProducts.gram = p.Volume;
+                db.Dishes_Products.Add(dishesProducts);
+                db.SaveChanges();
+            }
+
+
+
+
+            return RedirectToAction("Index", "Dishes");
         }
 
 
