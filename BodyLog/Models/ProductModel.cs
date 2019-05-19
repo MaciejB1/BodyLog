@@ -26,6 +26,7 @@ namespace BodyLog.Models
 
         [Display(Name = "Kalorie na 100g")]
         [Required(ErrorMessage = "Wprowadz kalorie")]
+        [OnlyPositiveNumberOfCalories]
         public float Calories { get; set; }
 
         [Display(Name = "Białko na 100g")]
@@ -42,6 +43,9 @@ namespace BodyLog.Models
         [Required(ErrorMessage = "Wprowadz tłuszcze")]
         [MinMaxWeightOfProductFats]
         public float Fats { get; set; }
+
+        //[ForeignKey("UserId")]
+        public virtual string UserId { get; set; }
 
         [NotMapped]
         [MaxWeightOfProductsSum]
