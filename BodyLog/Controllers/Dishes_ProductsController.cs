@@ -12,7 +12,7 @@ namespace BodyLog.Controllers
 {
     public class Dishes_ProductsController : Controller
     {
-        private MainDB db = new MainDB();
+        private DefaultConnection db = new DefaultConnection();
 
 
         public ActionResult Index()
