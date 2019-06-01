@@ -242,6 +242,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-BodyLog-20190315063228.mdf" />
+    <Content Include="App_Data\aspnet-BodyLog-20190315063228_log.ldf">
+      <DependentUpon>aspnet-BodyLog-20190315063228.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-journal.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -319,7 +323,6 @@
     <Content Include="Views\Dishes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
