@@ -8,14 +8,11 @@
 
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-
-
-    <div class="form-group">
+    <div class="">
         <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
             @Html.LabelFor(model => model.Dishes.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -23,38 +20,65 @@
                 @Html.ValidationMessageFor(model => model.Dishes.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="row">
+        <table class="table" id="productsAdded">
+
+            <tr> <th> Produkt </th> <th> Ilość </th> <th> Kalorie </th> <th> Białko </th> <th> Węglowodany </th> <th> tłuszcze</th> <th> </th></tr>
+
             @for (int i = 0; i < Model.Products.Count; i++)
             {
-                <div class="col-sm-3" style="margin-top: 20px" >
-              
-                    <label>  @Model.Products[i].Name</label>
-
-
-
-                    @Html.EditorFor(model => model.Products[i].Volume, new { htmlAttributes = new { @class = "form-control", @placeholder = "ilosć w gramach"} })
-
-
-                    @Html.HiddenFor(model => model.Products[i].Id)
-                    @Html.HiddenFor(model => model.Products[i].Calories)
-                    @Html.HiddenFor(model => model.Products[i].Proteins)
-                    @Html.HiddenFor(model => model.Products[i].Carbohydrates)
-                    @Html.HiddenFor(model => model.Products[i].Fats)
-                </div>
+                <tr data-productAdded=@Model.Products[i].Id style="display: none">
+                    <td>  @Model.Products[i].Name </td>
+                    <td> @Html.EditorFor(model => model.Products[i].Volume, new { htmlAttributes = new { @class = "form-control", @placeholder = "gramy", style = "width:100px; height: 30px" } }) </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td> </td>
+                    <td> <button name="removeProductButton" onclick="return false;"  class="btn-sm" id=@Model.Products[i].Id> X </button> </td>
+                    </tr>
             }
 
-        </div>
-        <div class="col-md-12" style="margin: 30px 30px 30px 0px">
-            <input type="submit" value="Dodaj" class="btn btn-default" />
-        </div>
+        </table>
     </div>
-    <div class="row">
-      
+
+    <div class="row" style="margin-top: 50px">
+        <form>
+            <p>
+                Szukaj Produkt
+            </p>
+            <input id="searchProduct" name="searchProduct" type="text" value="">
+            <input type="button" value="Szukaj">
+        </form>
+
+
     </div>
-</div>
+
+
+
+    <div class="row" style="margin-top: 20px">
+        <table class="table-condensed">
+            <tr> <th> Produkt </th> <th> Kalorie </th> <th> Białko </th> <th> Węglowodany </th> <th> tłuszcze</th> <th> </th></tr>
+            @for (int i = 0; i < Model.Products.Count; i++)
+            {
+
+                <tr style="display: table-row" data-productFromList=@Model.Products[i].Id>
+                    <td>  @Model.Products[i].Name</td>
+
+
+                    <td> @Model.Products[i].Calories  </td>
+                    <td> @Model.Products[i].Proteins </td>
+                    <td> @Model.Products[i].Carbohydrates </td>
+                    <td> @Model.Products[i].Fats </td>
+                    <td> <button name="addDishesButton" class="btn-sm" id=@Model.Products[i].Id> Dodaj </button> </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-12" style="margin: 30px 30px 30px 0px">
+        <input type="submit" value="Dodaj" class="btn btn-default" />
+    </div>
+
+
+
+
+    <script src="~/Scripts/createDishes.js"></script>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
