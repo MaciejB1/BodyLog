@@ -65,4 +65,16 @@ namespace BodyLog.Models
             return ValidationResult.Success;
         }
     }
+    public class OnlyPositiveNumberOfCalories : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            var product = (Product) validationContext.ObjectInstance;
+
+            if (product.Calories < 0)
+                    return new ValidationResult("Kalorie nie mogą być ujemne");
+
+            return ValidationResult.Success;
+        }
+    }
 }

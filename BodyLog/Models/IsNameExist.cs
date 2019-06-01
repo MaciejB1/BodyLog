@@ -13,6 +13,7 @@
 //        {
 //            var product = (Product)validationContext.ObjectInstance;
 //
+//            return ValidationResult.Success;
 //        }
 //    }
 //}
