@@ -28,11 +28,11 @@
             {
                 <tr data-productAdded=@Model.Products[i].Id style="display: none">
                     <td>  @Model.Products[i].Name </td>
-                    <td> @Html.EditorFor(model => model.Products[i].Volume, new { htmlAttributes = new { @class = "form-control", @placeholder = "gramy", style = "width:100px; height: 30px" } }) </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td> </td>
+                    <td> @Html.EditorFor(model => model.Products[i].Volume, new { htmlAttributes = new { @class = "form-control inputsVolume",   @placeholder = "gramy", style = "width:100px; height: 30px" } }) </td>
+                    <td data-calories=@Model.Products[i].Calories> 0</td>
+                    <td data-proteins=@Model.Products[i].Proteins> 0</td>
+                    <td data-carbohydrates=@Model.Products[i].Carbohydrates> 0</td>
+                    <td data-fats=@Model.Products[i].Fats> 0 </td>
                     <td> <button name="removeProductButton" onclick="return false;"  class="btn-sm" id=@Model.Products[i].Id> X </button> </td>
                     </tr>
             }
@@ -60,7 +60,7 @@
             @for (int i = 0; i < Model.Products.Count; i++)
             {
 
-                <tr style="display: table-row" data-productFromList=@Model.Products[i].Id>
+                <tr style="opacity: 1" data-productFromList=@Model.Products[i].Id>
                     <td>  @Model.Products[i].Name</td>
 
 
@@ -68,7 +68,7 @@
                     <td> @Model.Products[i].Proteins </td>
                     <td> @Model.Products[i].Carbohydrates </td>
                     <td> @Model.Products[i].Fats </td>
-                    <td> <button name="addDishesButton" class="btn-sm" id=@Model.Products[i].Id> Dodaj </button> </td>
+                    <td> <button style="display: block" name="addDishesButton" class="btn-sm" id=@Model.Products[i].Id> Dodaj </button> </td>
                 </tr>
             }
         </table>
