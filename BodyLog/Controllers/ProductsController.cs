@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Linq;
 using System.EnterpriseServices;
 using System.Linq;
 using System.Net;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Results;
 using System.Web.Security;
+using System.Web.UI;
 using Microsoft.Ajax.Utilities;
 
 namespace BodyLog.Controllers
@@ -144,10 +146,18 @@ namespace BodyLog.Controllers
             base.Dispose(disposing);
         }
 
-        public JsonResult IsNameExists(string Name)
-        {
-            return Json(!db.Products.Any(x => x.Name == Name), JsonRequestBehavior.AllowGet);
-        }
+//        public JsonResult IsNameExists(string Name)
+//        {
+//            var products = from p in db.Products
+//                select p;
+//
+//            if (!String.IsNullOrEmpty(Name))
+//            {
+//                products = products.Where(s => s.Name.Contains(Name));
+//            }
+//
+//            return Json(!db.Products.Any(x => x.Name == Name), JsonRequestBehavior.AllowGet);
+//        }
         public bool UserIdentity(Product product)
         {
             if (product.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
