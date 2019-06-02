@@ -221,7 +221,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\weightController.cs" />
+    <Compile Include="Controllers\WeightsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -239,7 +239,7 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Weights.cs" />
+    <Compile Include="Models\WeightsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -326,11 +326,11 @@
     <Content Include="Views\Dishes\Details.cshtml" />
     <Content Include="Views\Dishes\Edit.cshtml" />
     <Content Include="Views\Dishes\Index.cshtml" />
-    <Content Include="Views\weight\Create.cshtml" />
-    <Content Include="Views\weight\Delete.cshtml" />
-    <Content Include="Views\weight\Details.cshtml" />
-    <Content Include="Views\weight\Edit.cshtml" />
-    <Content Include="Views\weight\Index.cshtml" />
+    <Content Include="Views\Weights\Create.cshtml" />
+    <Content Include="Views\Weights\Delete.cshtml" />
+    <Content Include="Views\Weights\Details.cshtml" />
+    <Content Include="Views\Weights\Edit.cshtml" />
+    <Content Include="Views\Weights\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />
