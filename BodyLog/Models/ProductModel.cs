@@ -21,7 +21,8 @@ namespace BodyLog.Models
 
         [Display(Name = "Nazwa produktu")]
         [Required(ErrorMessage = "Wprowadz nazwe produktu")]
-        [Remote("IsNameExists", "Products", ErrorMessage = "Produkt o takiej nazwie już istnieje")]
+        //[Remote("IsNameExists", "Products", ErrorMessage = "Produkt o takiej nazwie już istnieje")]
+        [IsNameEx]
         public string Name { get; set; }
 
         [Display(Name = "Kalorie na 100g")]
