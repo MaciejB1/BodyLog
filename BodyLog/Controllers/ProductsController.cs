@@ -26,6 +26,7 @@ namespace BodyLog.Controllers
     {
         private DefaultConnection db = new DefaultConnection();
         private object _id = System.Web.HttpContext.Current.User.Identity.GetUserId();
+        public string nameToEdit;
 
 
         public ActionResult Index(string searchString)
@@ -91,6 +92,8 @@ namespace BodyLog.Controllers
             {
                 return HttpNotFound();
             }
+
+            nameToEdit = product.Name; /////////////////////
             return View(product);
         }
 
@@ -108,7 +111,9 @@ namespace BodyLog.Controllers
             }
             else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
+/*
             return View(product);
+*/
         }
 
         

@@ -13,11 +13,13 @@ namespace BodyLog.Models
 
         [Display(Name = "Waga")]
         [Required(ErrorMessage = "Musisz podać wagę")]
+        [Range(1, 999, ErrorMessage = "Waga musi być dodatnia")]
         public float Weight { get; set; }
 
         [Display(Name = "Data ważenia")]
         [Required(ErrorMessage = "Musisz podać datę ważenia")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Date, ErrorMessage = "Musisz wprowadzić prawidłową datę")]
+        [DateValid]
         public DateTime Date { get; set; }
 
         public virtual string UserId { get; set; }
