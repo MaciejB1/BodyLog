@@ -32,7 +32,7 @@ namespace BodyLog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Weights weights = db.Weights.Find(id);
-            if (weights == null)
+            if (weights == null || !UserIdentity(weights))
             {
                 return HttpNotFound();
             }
@@ -68,7 +68,7 @@ namespace BodyLog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Weights weights = db.Weights.Find(id);
-            if (weights == null)
+            if (weights == null || !UserIdentity(weights))
             {
                 return HttpNotFound();
             }
@@ -82,6 +82,7 @@ namespace BodyLog.Controllers
         {
             if (ModelState.IsValid)
             {
+                weights.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
                 db.Entry(weights).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -122,6 +123,14 @@ namespace BodyLog.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public bool UserIdentity(Weights weights)
+        {
+            if (weights.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+                return true;
+            return false;
+
         }
     }
 }
