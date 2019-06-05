@@ -223,6 +223,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\Training_PlansController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -232,15 +233,19 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActivitiesModel.cs" />
     <Compile Include="Models\BodyModel.cs" />
     <Compile Include="Models\DishesModel.cs" />
     <Compile Include="Models\Dishes_ProductsModel.cs" />
     <Compile Include="Models\IsNameExist.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\MaxWeightOfProductsSum.cs" />
+    <Compile Include="Models\Plans_ActivitiesModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Sports_CategoriesModel.cs" />
+    <Compile Include="Models\Training_PlansModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -324,8 +329,13 @@
     <Content Include="Views\Dishes\Index.cshtml" />
     <Content Include="Views\Body\Add.cshtml" />
     <Content Include="Views\Body\Index.cshtml" />
+    <Content Include="Views\Training_Plans\Index.cshtml" />
+    <Content Include="Views\Training_Plans\Add.cshtml" />
+    <Content Include="Views\Training_Plans\AddActivities.cshtml" />
+    <Content Include="Views\Home\TrainingDiaryView.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\AddActivities\" />
     <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>

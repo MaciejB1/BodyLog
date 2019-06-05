@@ -62,6 +62,10 @@ namespace BodyLog.Models
         public Dishes Dishes { get; set; }
         public List<Dishes> DishesList { get; set; }
         public List<Dishes_Products> Dishes_Products { get; set; }
+        public Body Body { get; set; }
+        public List<Body> BodyList { get; set; }
+        public Training_PlansModel Training_Plans { get; set; }
+        public List<Activities> Activities { get; set; }
         //   public List<Dishes_Products> Dishes_ProductsList { get; set; }
     }
 }

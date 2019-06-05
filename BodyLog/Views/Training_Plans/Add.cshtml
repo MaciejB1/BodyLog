@@ -1,0 +1,49 @@
+﻿@model BodyLog.Models.GlobalModel
+@{
+    ViewBag.Title = "Stwórz trening!";
+}
+<h2>Stwórz trening!</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                @Html.LabelFor(model => model.Training_Plans.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Training_Plans.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    
+                </div>
+            </div>
+            <div class="row">
+                @for (int i = 0; i < Model.Activities.Count; i++)
+                {
+                    <div class="col-sm-3" style="margin-top: 20px">
+
+                        <label>  @Model.Activities[i].Type</label>
+
+                       
+
+                        @Html.HiddenFor(model => model.Activities[i].Id)
+                        @Html.HiddenFor(model => model.Activities[i].Type)
+                        @Html.HiddenFor(model => model.Activities[i].Time)
+                        @Html.HiddenFor(model => model.Activities[i].Description)
+                        
+                    </div>
+                }
+            </div>
+            <div class="col-md-12" style="margin: 30px 30px 30px 0px">
+                <input type="submit" value="Dodaj" class="btn btn-default" />
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

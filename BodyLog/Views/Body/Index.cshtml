@@ -5,13 +5,7 @@
 <h2>Index</h2>
 
 @Html.ActionLink("Dodaj nowy", "Add")
-@using (Html.BeginForm())
-{
-    <p>
-        Nazwa: @Html.TextBox("SearchString")
-        <input type="submit" value="Szukaj" />
-    </p>
-}
+
 
 
 
@@ -32,7 +26,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Weight)kg
+                @Html.DisplayFor(modelItem => item.Weight)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)

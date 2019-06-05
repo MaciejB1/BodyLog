@@ -21,7 +21,7 @@ namespace BodyLog.Controllers
             return View();
         }
 
-        public ActionResult BodyView()
+        public ActionResult TrainingDiaryView()
         {
             return View();
         }

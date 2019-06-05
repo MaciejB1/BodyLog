@@ -12,4 +12,6 @@ public class MainDB : DbContext
     public DbSet<Dishes>  Dishes { get; set; }
     public DbSet<Dishes_Products> Dishes_Products { get; set; }
     public DbSet<Body> Body { get; set; }
+    public DbSet<Training_PlansModel> Training_PlansModels { get; set; }
+    public DbSet<Activities> Activities { get; set; }
 }

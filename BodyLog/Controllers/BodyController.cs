@@ -14,14 +14,9 @@ namespace BodyLog.Controllers
     {
         private MainDB db = new MainDB();
 
-        public ActionResult Index(string searchString)
+        public ActionResult Index()
         {
-            var body = from p in db.Body
-                           select p;
-
-            
-
-            return View(body);
+            return View();
         }
 
         public ActionResult Details(int? id)
@@ -43,5 +38,20 @@ namespace BodyLog.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Date,Weight,Description")] Body body)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Body.Add(body);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(body);
+        }
+
     }
 }
