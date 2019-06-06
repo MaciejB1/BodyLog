@@ -19,20 +19,30 @@ namespace BodyLog.Controllers
         public ActionResult Index()
         {
             GlobalModel global = new GlobalModel();
-   
+
             global.Products = db.Products.ToList();
-           
+
             global.Dishes_Products = db.Dishes_Products.ToList();
-            global.DishesList = db.Dishes.Where(dishes => db.Dishes_Products.ToList().Any(dp => dishes.Id == dp.Id_Dishes)).ToList<Dishes>();//.ToList<DishesList>(); ;
+            global.DishesList = db.Dishes.Where(dishes => db.Dishes_Products.ToList().Any(dp => dishes.Id == dp.Id_Dishes)).ToList<Dishes>();
+
+
 
             return View(global);
         }
 
         public ActionResult Create()
         {
-            GlobalModel global = new GlobalModel(); 
-            global.Products = db.Products.ToList();
-          
+            GlobalModel global = new GlobalModel();
+            List<Product> proList = new List<Product>();
+
+            foreach (var pro in db.Products)
+            {
+                if (pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+                    proList.Add(pro);
+            }
+
+            global.Products = proList;
+
             return View(global);
         }
 
@@ -59,6 +69,7 @@ namespace BodyLog.Controllers
             dishes.Proteins = proteins;
             dishes.Fats = fats;
             dishes.Date = System.DateTime.Now;
+            dishes.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
             db.Dishes.Add(dishes);
             db.SaveChanges();
@@ -66,8 +77,9 @@ namespace BodyLog.Controllers
             int id = dishes.Id;
 
 
-           
-            foreach (Product p in selectedProducts) {
+
+            foreach (Product p in selectedProducts)
+            {
                 Dishes_Products dishesProducts = new Dishes_Products();
                 dishesProducts.Id_Dishes = id;
 
@@ -77,7 +89,7 @@ namespace BodyLog.Controllers
                 db.SaveChanges();
             }
 
-            
+
 
 
             return RedirectToAction("Index", "Dishes");
@@ -105,7 +117,7 @@ namespace BodyLog.Controllers
             global.Products = db.Products.ToList();
             global.Dishes_Products = db.Dishes_Products.Where(x => x.Id_Dishes == id).ToList<Dishes_Products>();
             global.DishesList = db.Dishes.Where(x => x.Id == id).ToList<Dishes>();
-          
+
             if (id == null)
             {
                 return HttpNotFound();
