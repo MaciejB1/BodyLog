@@ -4,13 +4,18 @@
     ViewBag.Title = "Edit";
 }
 
+@functions {
+    public string MaxWeightOfProductsSum { get; }
+}
 <h2>Edytuj</h2>
-
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Produkt</h4>
         <hr />

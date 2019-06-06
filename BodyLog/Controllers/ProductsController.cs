@@ -137,6 +137,13 @@ namespace BodyLog.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+            List<Dishes_Products> dishList = new List<Dishes_Products>();
+
+            foreach (var dish in db.Dishes_Products)
+            {
+                if (dish.Id_Product == product.Id) return HttpNotFound();
+            }
+
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
