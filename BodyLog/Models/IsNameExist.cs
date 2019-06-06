@@ -20,6 +20,9 @@ namespace BodyLog.Models
             var products = from p in db.Products
                 select p;
 
+            if(product.Name == null)
+                return ValidationResult.Success;
+
             foreach (var pro in products)
             {
                 if (pro.Name.ToLower() == product.Name.ToLower() && pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
