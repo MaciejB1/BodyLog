@@ -101,10 +101,17 @@ namespace BodyLog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var selected = db.Dishes_Products.Where(x => x.Id_Dishes == id).ToList<Dishes_Products>();
+            foreach(Dishes_Products d in selected)
+            {
+                db.Dishes_Products.Remove(d);
+                db.SaveChanges();
+            }
+
             Dishes dishes = db.Dishes.Find(id);
             db.Dishes.Remove(dishes);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Dishes_Products");
         }
 
         protected override void Dispose(bool disposing)

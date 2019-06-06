@@ -193,12 +193,12 @@ namespace BodyLog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dishes_Products dishes_Products = db.Dishes_Products.Find(id);
+            Dishes dishes_Products = db.Dishes.Find(id);
             if (dishes_Products == null)
             {
                 return HttpNotFound();
             }
-            return View(dishes_Products);
+            return RedirectToAction("Delete", "Dishes", new { id = id });
         }
 
         [HttpPost, ActionName("Delete")]
