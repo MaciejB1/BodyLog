@@ -8,36 +8,49 @@
 
 @for (int i = 0; i < Model.DishesList.Count; i++)
 {
+    <h3> @Model.DishesList[i].Name </h3>
+    <table class="table-condensed" style="margin-bottom: 30px; margin-top: 5px; width: 550px">
+        <tr> <th class="col-md-2"> Produkt </th> <th class="col-md-2"> Ilość </th> <th class="col-md-2"> Kalorie </th> <th class="col-md-2"> Białko </th> <th class="col-md-3">Węglowodany</th> <th class="col-md-2"> Tłuszcze</th> <th> </th></tr>
+        @foreach (var item in Model.Dishes_Products.Where(dish => dish.Id_Dishes == Model.DishesList[i].Id))
+        {
+            <tr>
+                <td width="300px">
+                    @Model.Products.Find(p => p.Id == @item.Id_Product).Name
+                </td>
+                <td>
+                    @Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram
+                </td>
+                <td>
+                    @(Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram * @Model.Products.Find(p => p.Id == @item.Id_Product).Calories / 100 )
+                </td>
+                <td>
+                    @(Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram * @Model.Products.Find(p => p.Id == @item.Id_Product).Proteins / 100 )
+                </td>
+                <td>
+                    @(Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram * @Model.Products.Find(p => p.Id == @item.Id_Product).Carbohydrates / 100 )
+                </td>
+                <td>
+                    @(Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram * @Model.Products.Find(p => p.Id == @item.Id_Product).Fats / 100 )
+                </td>
 
-<table class="table-condensed" style="width: 500px; text-align: center">
-    <tr> <th> </th> <th> kalorie</th> <th> białko</th> <th> węglowodany</th> <th> tłuszcze</th></tr>
-    <tr>
-        <td> <b> @Model.DishesList[i].Name </b> </td>
-        <td> @Model.DishesList[i].Calories </td>
-        <td> @Model.DishesList[i].Carbohydrates </td>
-        <td> @Model.DishesList[i].Proteins </td>
-        <td> @Model.DishesList[i].Fats </td>
-    </tr>
-</table>
-<table class="table" style="margin-bottom: 30px; margin-top: 5px; width: 500px">
+            </tr>
+        }
+        <tr> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td><td> </td></tr>
 
-    @foreach (var item in Model.Dishes_Products.Where(dish => dish.Id_Dishes == Model.DishesList[i].Id))
-    {
         <tr>
-            <td width="300px">
-                @Model.Products.Find(p => p.Id == @item.Id_Product).Name
-            </td>
-            <td>
-                @Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram
-            </td>
-
+            <td> <b> suma </b> </td>
+            <td> </td>
+            <td style="margin-top: '20px'"> <b> @Model.DishesList[i].Calories  </b> </td>
+            <td style="padding-top: '20px'"> <b>  @Model.DishesList[i].Carbohydrates </b> </td>
+            <td style="padding-top: '20px'"> <b> @Model.DishesList[i].Proteins </b> </td>
+            <td style="padding-top: '20px'"><b> @Model.DishesList[i].Fats </b> </td>
         </tr>
-    }
+
         <tr>
             <td>
-                @Html.ActionLink("Edytuj", "Edit", new { id = Model.DishesList[i].Id })
+                @Html.ActionLink("Usun", "Delete", new { id = Model.DishesList[i].Id })
             </td>
             <td></td>
         </tr>
-</table>
+    </table>
 }
