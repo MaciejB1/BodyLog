@@ -131,6 +131,11 @@ namespace BodyLog.Controllers
             return View(product);
         }
 
+        public ActionResult Info()
+        {
+            return View();
+        }
+
         
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -141,7 +146,7 @@ namespace BodyLog.Controllers
 
             foreach (var dish in db.Dishes_Products)
             {
-                if (dish.Id_Product == product.Id) return HttpNotFound();
+                if (dish.Id_Product == product.Id) return RedirectToAction("Info", "Products");
             }
 
             db.Products.Remove(product);
