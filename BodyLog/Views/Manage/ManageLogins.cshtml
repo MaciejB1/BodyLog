@@ -1,10 +1,11 @@
 ﻿@model BodyLog.Models.ManageLoginsViewModel
+@using Microsoft.AspNet.Identity
 @using Microsoft.Owin.Security
 @{
     ViewBag.Title = "Manage your external logins";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@System.Web.HttpContext.Current.User.Identity.Name</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 @{

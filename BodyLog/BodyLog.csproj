@@ -18,7 +18,8 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -217,13 +218,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BodyController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\Dishes_ProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\Training_PlansController.cs" />
+    <Compile Include="Controllers\TrainingPlansController.cs" />
+    <Compile Include="Controllers\WeightsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,25 +236,27 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivitiesModel.cs" />
-    <Compile Include="Models\BodyModel.cs" />
+    <Compile Include="Models\Activities_PlansModel.cs" />
     <Compile Include="Models\DishesModel.cs" />
     <Compile Include="Models\Dishes_ProductsModel.cs" />
     <Compile Include="Models\IsNameExist.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\MaxWeightOfProductsSum.cs" />
-    <Compile Include="Models\Plans_ActivitiesModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Sports_CategoriesModel.cs" />
-    <Compile Include="Models\Training_PlansModel.cs" />
+    <Compile Include="Models\TrainingPlansModel.cs" />
+    <Compile Include="Models\WeightsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\BodyLogDB.mdf" />
-    <Content Include="App_Data\BodyLogDB_log.ldf">
-      <DependentUpon>BodyLogDB.mdf</DependentUpon>
+    <Content Include="App_Data\aspnet-BodyLog-20190315063228.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\aspnet-BodyLog-20190315063228_log.ldf">
+      <DependentUpon>aspnet-BodyLog-20190315063228.mdf</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\bootstrap-journal.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -263,9 +267,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\createDishes.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -327,15 +334,29 @@
     <Content Include="Views\Dishes\Details.cshtml" />
     <Content Include="Views\Dishes\Edit.cshtml" />
     <Content Include="Views\Dishes\Index.cshtml" />
-    <Content Include="Views\Body\Add.cshtml" />
-    <Content Include="Views\Body\Index.cshtml" />
-    <Content Include="Views\Training_Plans\Index.cshtml" />
-    <Content Include="Views\Training_Plans\Add.cshtml" />
-    <Content Include="Views\Training_Plans\AddActivities.cshtml" />
+    <Content Include="Views\Weights\Create.cshtml" />
+    <Content Include="Views\Weights\Delete.cshtml" />
+    <Content Include="Views\Weights\Details.cshtml" />
+    <Content Include="Views\Weights\Edit.cshtml" />
+    <Content Include="Views\Weights\Index.cshtml" />
+    <Content Include="Views\Activities\Create.cshtml" />
+    <Content Include="Views\Activities\Delete.cshtml" />
+    <Content Include="Views\Activities\Details.cshtml" />
+    <Content Include="Views\Activities\Edit.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\TrainingPlans\Create.cshtml" />
+    <Content Include="Views\TrainingPlans\Delete.cshtml" />
+    <Content Include="Views\TrainingPlans\Details.cshtml" />
+    <Content Include="Views\TrainingPlans\Edit.cshtml" />
+    <Content Include="Views\TrainingPlans\Index.cshtml" />
     <Content Include="Views\Home\TrainingDiaryView.cshtml" />
+    <Content Include="Views\Activities_Plans\Create.cshtml" />
+    <Content Include="Views\Activities_Plans\Delete.cshtml" />
+    <Content Include="Views\Activities_Plans\Details.cshtml" />
+    <Content Include="Views\Activities_Plans\Edit.cshtml" />
+    <Content Include="Views\Activities_Plans\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\AddActivities\" />
     <Folder Include="Views\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +374,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903200951042_InitialCreate.resx">

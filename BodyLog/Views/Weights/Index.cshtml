@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<BodyLog.Models.Weights>
+
+@{
+    ViewBag.Title = "Waga";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Waga</h2>
+
+<p>
+    @Html.ActionLink("Dodaj nową wagę", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        @if (item.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new {id = item.Id}) |
+                @Html.ActionLink("Usuń", "Delete", new {id = item.Id})
+            </td>
+        }
+    </tr>
+}
+
+</table>

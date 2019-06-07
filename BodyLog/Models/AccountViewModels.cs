@@ -48,6 +48,7 @@ namespace BodyLog.Models
 
     public class LoginViewModel
     {
+        [Key]
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]

@@ -7,13 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BodyLog.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BodyLog.Controllers
 {
     public class Dishes_ProductsController : Controller
     {
-        private MainDB db = new MainDB();
-
+        private DefaultConnection db = new DefaultConnection();
+        private object _id = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
         public ActionResult Index()
         {

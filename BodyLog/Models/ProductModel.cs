@@ -21,11 +21,13 @@ namespace BodyLog.Models
 
         [Display(Name = "Nazwa produktu")]
         [Required(ErrorMessage = "Wprowadz nazwe produktu")]
-        [Remote("IsNameExists", "Products", ErrorMessage = "Produkt o takiej nazwie już istnieje")]
+        //[Remote("IsNameExists", "Products", ErrorMessage = "Produkt o takiej nazwie już istnieje")]
+        [IsNameEx]
         public string Name { get; set; }
 
         [Display(Name = "Kalorie na 100g")]
         [Required(ErrorMessage = "Wprowadz kalorie")]
+        [OnlyPositiveNumberOfCalories]
         public float Calories { get; set; }
 
         [Display(Name = "Białko na 100g")]
@@ -42,6 +44,9 @@ namespace BodyLog.Models
         [Required(ErrorMessage = "Wprowadz tłuszcze")]
         [MinMaxWeightOfProductFats]
         public float Fats { get; set; }
+
+        //[ForeignKey("UserId")]
+        public virtual string UserId { get; set; }
 
         [NotMapped]
         [MaxWeightOfProductsSum]
@@ -62,10 +67,10 @@ namespace BodyLog.Models
         public Dishes Dishes { get; set; }
         public List<Dishes> DishesList { get; set; }
         public List<Dishes_Products> Dishes_Products { get; set; }
-        public Body Body { get; set; }
-        public List<Body> BodyList { get; set; }
-        public Training_PlansModel Training_Plans { get; set; }
-        public List<Activities> Activities { get; set; }
+        public List<TrainingPlansModel> TrainingPlans { get; set; }
+        public List<ActivitiesModel> ActivitiesList { get; set; }
+        public ActivitiesModel Activities { get; set; }
+        public List<Activities_Plans> Activities_Plans { get; set; }
         //   public List<Dishes_Products> Dishes_ProductsList { get; set; }
     }
 }

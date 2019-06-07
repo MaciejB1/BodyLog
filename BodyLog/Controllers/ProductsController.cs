@@ -1,25 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Linq;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BodyLog.Models;
-
+using Microsoft.AspNet.Identity;
+using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
+using System.Web.Http.Controllers;
+using System.Web.Http.Results;
+using System.Web.Security;
+using System.Web.UI;
+using Microsoft.Ajax.Utilities;
 
 namespace BodyLog.Controllers
 {
     public class ProductsController : Controller
     {
-        private MainDB db = new MainDB();
+        private DefaultConnection db = new DefaultConnection();
+        private object _id = System.Web.HttpContext.Current.User.Identity.GetUserId();
+        public string nameToEdit;
 
-       
+
         public ActionResult Index(string searchString)
         {
             var products = from p in db.Products
-                         select p;
+                select p;
 
             if (!String.IsNullOrEmpty(searchString))        
             {
@@ -37,7 +50,7 @@ namespace BodyLog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
-            if (product == null)
+            if (product == null || !UserIdentity(product))
             {
                 return HttpNotFound();
             }
@@ -53,10 +66,12 @@ namespace BodyLog.Controllers
      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Calories,Proteins,Carbohydrates,Fats")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,Calories,Proteins,Carbohydrates,Fats,UserId")] Product product)
         {
             if (ModelState.IsValid)
             {
+                //ModelState.Remove("UserId");
+                product.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -65,7 +80,7 @@ namespace BodyLog.Controllers
             return View(product);
         }
 
-        [ValidateAntiForgeryToken]
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,25 +88,32 @@ namespace BodyLog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
-            if (product == null)
+            if (product == null || !UserIdentity(product))
             {
                 return HttpNotFound();
             }
+
+            nameToEdit = product.Name; /////////////////////
             return View(product);
         }
 
      
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Calories,Proteins,Carbohydrates,Fats")] Product product)
+        
+        public ActionResult Edit([Bind(Include = "Id,Name,Calories,Proteins,Carbohydrates,Fats,UserId")] Product product)
         {
             if (ModelState.IsValid)
             {
+                product.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+/*
             return View(product);
+*/
         }
 
         
@@ -102,7 +124,7 @@ namespace BodyLog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
-            if (product == null)
+            if (product == null || !UserIdentity(product))
             {
                 return HttpNotFound();
             }
@@ -129,9 +151,24 @@ namespace BodyLog.Controllers
             base.Dispose(disposing);
         }
 
-        public JsonResult IsNameExists(string Name)
+//        public JsonResult IsNameExists(string Name)
+//        {
+//            var products = from p in db.Products
+//                select p;
+//
+//            if (!String.IsNullOrEmpty(Name))
+//            {
+//                products = products.Where(s => s.Name.Contains(Name));
+//            }
+//
+//            return Json(!db.Products.Any(x => x.Name == Name), JsonRequestBehavior.AllowGet);
+//        }
+        public bool UserIdentity(Product product)
         {
-            return Json(!db.Products.Any(x => x.Name == Name), JsonRequestBehavior.AllowGet);
+            if (product.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+                return true;
+            return false;
+
         }
     }
 }
