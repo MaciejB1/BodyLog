@@ -108,7 +108,7 @@ namespace BodyLog.Controllers
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            } else if (!ModelState.IsValid) return View(product);
             else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
 /*

@@ -57,7 +57,10 @@ namespace BodyLog.Controllers
 
             global.Products = proList;
 
-            return View(global);
+
+            if (ModelState.IsValid)
+                return View(global);
+            else return Create();
         }
 
 
@@ -84,12 +87,13 @@ namespace BodyLog.Controllers
             dishes.Fats = fats;
             dishes.Date = System.DateTime.Now;
             dishes.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (dishes.Name == null) dishes.Name = "Danie bez nazwy";
+
 
             db.Dishes.Add(dishes);
             db.SaveChanges();
 
             int id = dishes.Id;
-
 
 
             foreach (Product p in selectedProducts)
@@ -105,8 +109,7 @@ namespace BodyLog.Controllers
 
 
 
-
-            return RedirectToAction("Index", "Dishes");
+            return RedirectToAction("Index", "Dishes_Products");
         }
 
 
