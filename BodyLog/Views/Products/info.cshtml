@@ -1,0 +1,13 @@
+﻿@model BodyLog.Models.Product
+
+<h2>Niestety nie możesz usunąć tego produktu. </h2>
+
+<hr />
+
+<h3>  Twój produkt znajduje się w jednym z utworzonych przez Ciebie dań. </h3>
+ 
+<hr /> 
+<p>
+    @Html.ActionLink("Powrót do listy", "Index")
+    @Html.ActionLink("Zobacz Dania", "Index", "Dishes_Products")
+</p>
