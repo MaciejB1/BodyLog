@@ -19,30 +19,20 @@ namespace BodyLog.Controllers
         public ActionResult Index()
         {
             GlobalModel global = new GlobalModel();
-
+   
             global.Products = db.Products.ToList();
 
             global.Dishes_Products = db.Dishes_Products.ToList();
             global.DishesList = db.Dishes.Where(dishes => db.Dishes_Products.ToList().Any(dp => dishes.Id == dp.Id_Dishes)).ToList<Dishes>();
-
-
 
             return View(global);
         }
 
         public ActionResult Create()
         {
-            GlobalModel global = new GlobalModel();
-            List<Product> proList = new List<Product>();
-
-            foreach (var pro in db.Products)
-            {
-                if (pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
-                    proList.Add(pro);
-            }
-
-            global.Products = proList;
-
+            GlobalModel global = new GlobalModel(); 
+            global.Products = db.Products.ToList();
+          
             return View(global);
         }
 
@@ -69,7 +59,6 @@ namespace BodyLog.Controllers
             dishes.Proteins = proteins;
             dishes.Fats = fats;
             dishes.Date = System.DateTime.Now;
-            dishes.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
             db.Dishes.Add(dishes);
             db.SaveChanges();
@@ -77,9 +66,8 @@ namespace BodyLog.Controllers
             int id = dishes.Id;
 
 
-
-            foreach (Product p in selectedProducts)
-            {
+           
+            foreach (Product p in selectedProducts) {
                 Dishes_Products dishesProducts = new Dishes_Products();
                 dishesProducts.Id_Dishes = id;
 
@@ -91,8 +79,7 @@ namespace BodyLog.Controllers
 
 
 
-
-            return RedirectToAction("Index", "Dishes");
+            return RedirectToAction("Index", "Dishes_Products");
         }
 
 
@@ -179,12 +166,12 @@ namespace BodyLog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dishes_Products dishes_Products = db.Dishes_Products.Find(id);
+            Dishes dishes_Products = db.Dishes.Find(id);
             if (dishes_Products == null)
             {
                 return HttpNotFound();
             }
-            return View(dishes_Products);
+            return RedirectToAction("Delete", "Dishes", new { id = id });
         }
 
         [HttpPost, ActionName("Delete")]
