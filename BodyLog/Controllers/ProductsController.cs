@@ -26,8 +26,7 @@ namespace BodyLog.Controllers
     {
         private DefaultConnection db = new DefaultConnection();
         private object _id = System.Web.HttpContext.Current.User.Identity.GetUserId();
-        public string nameToEdit;
-
+        Product elo = new Product();
 
         public ActionResult Index(string searchString)
         {
@@ -93,27 +92,31 @@ namespace BodyLog.Controllers
                 return HttpNotFound();
             }
 
-            nameToEdit = product.Name; /////////////////////
+            elo.nameToEdit = product.Name;
+
             return View(product);
         }
 
      
         [HttpPost]
-        
         public ActionResult Edit([Bind(Include = "Id,Name,Calories,Proteins,Carbohydrates,Fats,UserId")] Product product)
         {
-            if (ModelState.IsValid)
+            if (product.Name == elo.nameToEdit || product.Name != elo.nameToEdit)
             {
-                product.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                db.Entry(product).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            } else if (!ModelState.IsValid) return View(product);
-            else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (ModelState.IsValid || product.Name == elo.nameToEdit)
+                {
+                    product.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+                    db.Entry(product).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else if (!ModelState.IsValid) return View(product);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-/*
-            return View(product);
-*/
+            /*
+                        return View(product);
+            */
         }
 
         

@@ -232,6 +232,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Calculator.cs" />
     <Compile Include="Models\DishesModel.cs" />
     <Compile Include="Models\Dishes_ProductsModel.cs" />
     <Compile Include="Models\IsNameExist.cs" />
