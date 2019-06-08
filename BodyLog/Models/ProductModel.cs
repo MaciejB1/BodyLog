@@ -49,6 +49,7 @@ namespace BodyLog.Models
         //[ForeignKey("UserId")]
         public virtual string UserId { get; set; }
 
+
         [NotMapped]
         [MaxWeightOfProductsSum]
         public byte weightValid { get; set; }       //prop only for valid
