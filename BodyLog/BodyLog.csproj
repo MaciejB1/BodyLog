@@ -70,8 +70,6 @@
     <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
     </Reference>
@@ -218,13 +216,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\DishesController.cs" />
     <Compile Include="Controllers\Dishes_ProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\TrainingPlansController.cs" />
     <Compile Include="Controllers\WeightsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,8 +231,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\ActivitiesModel.cs" />
-    <Compile Include="Models\Activities_PlansModel.cs" />
     <Compile Include="Models\DishesModel.cs" />
     <Compile Include="Models\Dishes_ProductsModel.cs" />
     <Compile Include="Models\IsNameExist.cs" />
@@ -245,7 +239,6 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\TrainingPlansModel.cs" />
     <Compile Include="Models\WeightsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -339,22 +332,7 @@
     <Content Include="Views\Weights\Details.cshtml" />
     <Content Include="Views\Weights\Edit.cshtml" />
     <Content Include="Views\Weights\Index.cshtml" />
-    <Content Include="Views\Activities\Create.cshtml" />
-    <Content Include="Views\Activities\Delete.cshtml" />
-    <Content Include="Views\Activities\Details.cshtml" />
-    <Content Include="Views\Activities\Edit.cshtml" />
-    <Content Include="Views\Activities\Index.cshtml" />
-    <Content Include="Views\TrainingPlans\Create.cshtml" />
-    <Content Include="Views\TrainingPlans\Delete.cshtml" />
-    <Content Include="Views\TrainingPlans\Details.cshtml" />
-    <Content Include="Views\TrainingPlans\Edit.cshtml" />
-    <Content Include="Views\TrainingPlans\Index.cshtml" />
-    <Content Include="Views\Home\TrainingDiaryView.cshtml" />
-    <Content Include="Views\Activities_Plans\Create.cshtml" />
-    <Content Include="Views\Activities_Plans\Delete.cshtml" />
-    <Content Include="Views\Activities_Plans\Details.cshtml" />
-    <Content Include="Views\Activities_Plans\Edit.cshtml" />
-    <Content Include="Views\Activities_Plans\Index.cshtml" />
+    <Content Include="Views\Products\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />
@@ -374,7 +352,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903200951042_InitialCreate.resx">

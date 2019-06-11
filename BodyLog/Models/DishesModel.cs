@@ -35,6 +35,8 @@ namespace BodyLog.Models
         [Display(Name = "Tłuszcze w gramach")]
         [Required(ErrorMessage = "Wprowadź tłuszcze")]
         public float Fats { get; set; }
+
+        public virtual string UserId { get; set; }
     }
 
 }

@@ -131,12 +131,24 @@ namespace BodyLog.Controllers
             return View(product);
         }
 
+        public ActionResult Info()
+        {
+            return View();
+        }
+
         
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+            List<Dishes_Products> dishList = new List<Dishes_Products>();
+
+            foreach (var dish in db.Dishes_Products)
+            {
+                if (dish.Id_Product == product.Id) return RedirectToAction("Info", "Products");
+            }
+
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
