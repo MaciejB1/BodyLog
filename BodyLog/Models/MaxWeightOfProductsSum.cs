@@ -45,7 +45,7 @@ namespace BodyLog.Models
             if (product.Proteins > 100)
                 return new ValidationResult("Za duża ilość białka");
             if (product.Proteins < 0)
-                return new ValidationResult("Białko nie mogą być ujemne");
+                return new ValidationResult("Białko nie może być ujemne");
 
             return ValidationResult.Success;
         }
