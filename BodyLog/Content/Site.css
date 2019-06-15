@@ -119,7 +119,7 @@ div.flip-out {
 
 .card {
     width: 100%;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
     position: relative;
     border-radius: 3px 3px 0 0;
@@ -143,7 +143,7 @@ div.flip-out {
 
     .card img {
         padding-bottom: 150px;
-        height: 260px;
+        height: 330px;
     }
 
 .full-card {

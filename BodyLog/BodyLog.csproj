@@ -220,7 +220,6 @@
     <Compile Include="Controllers\Dishes_ProductsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\WeightsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,7 +236,6 @@
     <Compile Include="Models\IsNameExist.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\MaxWeightOfProductsSum.cs" />
-    <Compile Include="Models\Movies.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -258,8 +256,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\toastr.css" />
-    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -268,8 +264,6 @@
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\toastr.scss" />
-    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\createDishes.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -282,8 +276,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\toastr.js" />
-    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -341,12 +333,6 @@
     <Content Include="Views\Weights\Edit.cshtml" />
     <Content Include="Views\Weights\Index.cshtml" />
     <Content Include="Views\Products\Info.cshtml" />
-    <Content Include="Views\Movies\Create.cshtml" />
-    <Content Include="Views\Movies\Delete.cshtml" />
-    <Content Include="Views\Movies\Details.cshtml" />
-    <Content Include="Views\Movies\Edit.cshtml" />
-    <Content Include="Views\Movies\Index.cshtml" />
-    <Content Include="Views\Movies\Watch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\App_LocalResources\" />

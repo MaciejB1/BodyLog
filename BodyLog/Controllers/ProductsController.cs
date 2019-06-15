@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
 using System.Data.Linq;
 using System.EnterpriseServices;
 using System.Linq;
@@ -28,6 +26,8 @@ namespace BodyLog.Controllers
     {
         private DefaultConnection db = new DefaultConnection();
         private object _id = System.Web.HttpContext.Current.User.Identity.GetUserId();
+        public string nameToEdit;
+
 
         public ActionResult Index(string searchString)
         {
@@ -93,11 +93,13 @@ namespace BodyLog.Controllers
                 return HttpNotFound();
             }
 
+            nameToEdit = product.Name; /////////////////////
             return View(product);
         }
 
      
         [HttpPost]
+        
         public ActionResult Edit([Bind(Include = "Id,Name,Calories,Proteins,Carbohydrates,Fats,UserId")] Product product)
         {
             if (ModelState.IsValid)
@@ -106,8 +108,12 @@ namespace BodyLog.Controllers
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            } else if (!ModelState.IsValid) return View(product);
+            }
             else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+/*
+            return View(product);
+*/
         }
 
         

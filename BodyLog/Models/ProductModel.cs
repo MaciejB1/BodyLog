@@ -6,7 +6,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 
 namespace BodyLog.Models
 {
@@ -48,7 +47,6 @@ namespace BodyLog.Models
 
         //[ForeignKey("UserId")]
         public virtual string UserId { get; set; }
-
 
         [NotMapped]
         [MaxWeightOfProductsSum]
