@@ -41,8 +41,8 @@
             <td> <b> suma </b> </td>
             <td> </td>
             <td style="margin-top: '20px'"> <b> @Model.DishesList[i].Calories  </b> </td>
-            <td style="padding-top: '20px'"> <b>  @Model.DishesList[i].Carbohydrates </b> </td>
-            <td style="padding-top: '20px'"> <b> @Model.DishesList[i].Proteins </b> </td>
+            <td style="padding-top: '20px'"> <b>  @Model.DishesList[i].Proteins </b> </td>
+            <td style="padding-top: '20px'"> <b> @Model.DishesList[i].Carbohydrates </b> </td>
             <td style="padding-top: '20px'"><b> @Model.DishesList[i].Fats </b> </td>
         </tr>
 
@@ -50,7 +50,7 @@
             <td>
                 @Html.ActionLink("Usun", "Delete", new { id = Model.DishesList[i].Id })
             </td>
-            <td></td>
+            <td>  @Html.ActionLink("Edytuj", "Edit", new { id = Model.DishesList[i].Id, name = Model.DishesList[i].Name })</td>
         </tr>
     </table>
 }
