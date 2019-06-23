@@ -6,59 +6,29 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Web;
 using System.Web.Mvc;
 using Google.Protobuf.WellKnownTypes;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 
 namespace BodyLog.Models
 {
     public class IsNameEx : ValidationAttribute
     {
-        private DefaultConnection db;
+        private DefaultConnection db = new DefaultConnection();
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            db = new DefaultConnection();
             var product = (Product)validationContext.ObjectInstance;
-            List<Product> proListEdit = new List<Product>();
-            List<Product> proList = new List<Product>();
 
-            foreach (var row in db.Products)
-            {
-                proList.Add(row);
-                if (row.Id == product.Id)
-                    proListEdit.Add(row);
-            }
+            var products = from p in db.Products
+                select p;
 
-//            var productsToEdit = from p in db.Products
-//                select p;
-
-
-            if (product.Name == null)
+            if(product.Name == null)
                 return ValidationResult.Success;
 
-            if (proListEdit.Count == 0)
+            foreach (var pro in products)
             {
-                proListEdit.Clear();
-                foreach (var pro in proList)
-                {
-                    if (pro.Name.ToLower() == product.Name.ToLower() && pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
-                        return new ValidationResult("Produkt o takiej nazwie już istnieje.");
-                }
-                proList.Clear();
-                return ValidationResult.Success;
+                if (pro.Name.ToLower() == product.Name.ToLower() && pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+                    return new ValidationResult("Produkt o takiej nazwie już istnieje.");
             }
-            else if (product.Name.ToLower() != proListEdit.First().Name.ToLower())
-            {
-                proListEdit.Clear();
-                foreach (var pro in proList)
-                {
-                    if (pro.Name.ToLower() == product.Name.ToLower() && pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
-                        return new ValidationResult("Produkt o takiej nazwie już istnieje.");
-                }
-                proList.Clear();
-                return ValidationResult.Success;
-            }
-            proList.Clear();
-            proListEdit.Clear();
+
             return ValidationResult.Success;
         }
     }

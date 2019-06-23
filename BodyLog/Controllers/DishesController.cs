@@ -33,13 +33,13 @@ namespace BodyLog.Controllers
             return View(dishes);
         }
 
-
+        
         public ActionResult Create()
         {
             return View();
         }
 
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Date,Calories,Proteins,Carbohydrates,Fats")] Dishes dishes)
@@ -81,7 +81,7 @@ namespace BodyLog.Controllers
             return View(dishes);
         }
 
-
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -96,7 +96,7 @@ namespace BodyLog.Controllers
             return View(dishes);
         }
 
-
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

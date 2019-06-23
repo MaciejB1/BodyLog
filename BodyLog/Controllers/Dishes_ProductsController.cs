@@ -19,20 +19,44 @@ namespace BodyLog.Controllers
         public ActionResult Index()
         {
             GlobalModel global = new GlobalModel();
-   
+            List<Product> proList = new List<Product>();
+            List<Dishes> dishList = new List<Dishes>();
+
             global.Products = db.Products.ToList();
 
             global.Dishes_Products = db.Dishes_Products.ToList();
             global.DishesList = db.Dishes.Where(dishes => db.Dishes_Products.ToList().Any(dp => dishes.Id == dp.Id_Dishes)).ToList<Dishes>();
+
+            foreach (var pro in db.Products)
+            {
+                if (pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+                    proList.Add(pro);
+            }
+            foreach (var dish in db.Dishes)
+            {
+                if (dish.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+                    dishList.Add(dish);
+            }
+
+            global.Products = proList;
+            global.DishesList = dishList;
 
             return View(global);
         }
 
         public ActionResult Create()
         {
-            GlobalModel global = new GlobalModel(); 
-            global.Products = db.Products.ToList();
-          
+            GlobalModel global = new GlobalModel();
+            List<Product> proList = new List<Product>();
+
+            foreach (var pro in db.Products)
+            {
+                if (pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+                    proList.Add(pro);
+            }
+
+            global.Products = proList;
+
             return View(global);
         }
 
@@ -59,6 +83,7 @@ namespace BodyLog.Controllers
             dishes.Proteins = proteins;
             dishes.Fats = fats;
             dishes.Date = System.DateTime.Now;
+            dishes.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
             db.Dishes.Add(dishes);
             db.SaveChanges();
@@ -66,8 +91,9 @@ namespace BodyLog.Controllers
             int id = dishes.Id;
 
 
-           
-            foreach (Product p in selectedProducts) {
+
+            foreach (Product p in selectedProducts)
+            {
                 Dishes_Products dishesProducts = new Dishes_Products();
                 dishesProducts.Id_Dishes = id;
 
@@ -76,6 +102,7 @@ namespace BodyLog.Controllers
                 db.Dishes_Products.Add(dishesProducts);
                 db.SaveChanges();
             }
+
 
 
 
@@ -98,12 +125,29 @@ namespace BodyLog.Controllers
         }
 
 
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, string name)
         {
             GlobalModel global = new GlobalModel();
-            global.Products = db.Products.ToList();
+            List<Product> proList = new List<Product>();
+            global.Dishes = new Dishes();
+
+            foreach (var pro in db.Products)
+            {
+                if (pro.UserId == System.Web.HttpContext.Current.User.Identity.GetUserId())
+                    proList.Add(pro);
+            }
+
+            global.Products = proList;
             global.Dishes_Products = db.Dishes_Products.Where(x => x.Id_Dishes == id).ToList<Dishes_Products>();
             global.DishesList = db.Dishes.Where(x => x.Id == id).ToList<Dishes>();
+
+
+            for(int i = 0; i< global.Dishes_Products.Count; i++)
+            {
+                global.Products.Find(d => d.Id == global.Dishes_Products[i].Id_Product).Volume = global.Dishes_Products[i].gram;
+            }
+
+            global.Dishes.Name = name;
 
             if (id == null)
             {
@@ -114,11 +158,9 @@ namespace BodyLog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(GlobalModel list, Dishes dishes)
+        public ActionResult Edit(GlobalModel list, [Bind(Include = "Id,Name,Date,Calories,Proteins,Carbohydrates,Fats")] Dishes dishes)
         {
             var selectedProducts = list.Products.Where(x => x.Volume > 0).ToList<Product>();
-
-
             float calories = 0, carbo = 0, proteins = 0, fats = 0;
 
             foreach (Product p in selectedProducts)
@@ -134,6 +176,7 @@ namespace BodyLog.Controllers
             dishes.Proteins = proteins;
             dishes.Fats = fats;
             dishes.Date = System.DateTime.Now;
+            dishes.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
 
             db.Dishes.Add(dishes);
             db.SaveChanges();
@@ -149,14 +192,28 @@ namespace BodyLog.Controllers
 
                 dishesProducts.Id_Product = p.Id;
                 dishesProducts.gram = p.Volume;
-                db.Dishes_Products.Add(dishesProducts);
+               
+                 db.Dishes_Products.Add(dishesProducts);
+                db.SaveChanges();
+            }
+
+            {
+                var selected = db.Dishes_Products.Where(x => x.Id_Dishes == list.Id).ToList<Dishes_Products>();
+                foreach (Dishes_Products d in selected)
+                {
+                    db.Dishes_Products.Remove(d);
+                    db.SaveChanges();
+                }
+
+                Dishes dishesD = db.Dishes.Find(list.Id);
+                db.Dishes.Remove(dishesD);
                 db.SaveChanges();
             }
 
 
 
 
-            return RedirectToAction("Index", "Dishes");
+            return RedirectToAction("Index", "Dishes_Products");
         }
 
 
