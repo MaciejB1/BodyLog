@@ -92,8 +92,6 @@ namespace BodyLog.Controllers
                 return HttpNotFound();
             }
 
-            elo.nameToEdit = product.Name;
-
             return View(product);
         }
 
@@ -110,9 +108,6 @@ namespace BodyLog.Controllers
             } else if (!ModelState.IsValid) return View(product);
             else return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            /*
-                        return View(product);
-            */
         }
 
         
