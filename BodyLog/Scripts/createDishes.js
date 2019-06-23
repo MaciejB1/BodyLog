@@ -13,6 +13,35 @@ document.querySelectorAll('.inputsVolume ').forEach((element) => {
   
 })
 
+function valid(){
+    const inputName = document.querySelector("input[name='Dishes.Name']");
+    const validMessage = document.getElementById("validMessage");
+    validMessage.innerHTML = "";
+    if (inputName.value.length < 1) {
+        inputName.style.border = "1px solid red";
+        validMessage.innerHTML = "Uzupełnij nazwę dania!";
+        return false;
+    }
+    let count = 0;
+    for (let item of inputsVolume) {
+        if (item.parentElement.parentElement.style.display == "table-row") {
+            count++;
+            if (item.value.length < 1) {
+                validMessage.innerHTML = "Wprowadź ilość w gramach dla każdego wybranego produktu!"
+                item.style.border = "1px solid red";
+                return false;
+            }  
+        }
+    }
+
+    if (count == 0) {
+        validMessage.innerHTML = "Nie wybrałeś żadnego produktu!";
+        return false;
+    }
+
+    return true;
+}
+
 
 
 

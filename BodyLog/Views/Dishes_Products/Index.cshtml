@@ -18,7 +18,7 @@
                     @Model.Products.Find(p => p.Id == @item.Id_Product).Name
                 </td>
                 <td>
-                    @Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram
+                    @Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram g
                 </td>
                 <td>
                     @(Model.Dishes_Products.Find(p => p.Id_Product == @item.Id_Product && p.Id_Dishes == Model.DishesList[i].Id).gram * @Model.Products.Find(p => p.Id == @item.Id_Product).Calories / 100 )

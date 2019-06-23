@@ -106,7 +106,7 @@ namespace BodyLog.Controllers
 
 
 
-            return RedirectToAction("Index", "Dishes");
+            return RedirectToAction("Index", "Dishes_Products");
         }
 
 
@@ -213,7 +213,7 @@ namespace BodyLog.Controllers
 
 
 
-            return RedirectToAction("Index", "Dishes");
+            return RedirectToAction("Index", "Dishes_Products");
         }
 
 
