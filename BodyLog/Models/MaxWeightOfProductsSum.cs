@@ -77,4 +77,17 @@ namespace BodyLog.Models
             return ValidationResult.Success;
         }
     }
+
+    public class siemaValid : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            var product = (Product)validationContext.ObjectInstance;
+
+            if (product.GetType() != typeof(int))
+                return new ValidationResult("Siema");
+
+            return ValidationResult.Success;
+        }
+    }
 }
