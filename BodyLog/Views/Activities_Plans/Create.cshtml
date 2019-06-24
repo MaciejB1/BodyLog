@@ -21,10 +21,20 @@
                 @Html.ValidationMessageFor(model => model.Training.Date_start, "", new { @class = "text-danger" })
             </div>
             @Html.LabelFor(model => model.Training.Date_end, htmlAttributes: new { @class = "control-label col-md-2" })
+
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Training.Date_end, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Training.Date_end, "", new { @class = "text-danger" })
             </div>
+            @for (int i = 0; i < Model.Activities_Plans.Count; i++)
+            {
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Activities_Plans[i].Time, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Activities_Plans[i].Time, "", new { @class = "text-danger" })
+                </div>
+                @Html.LabelFor(model => model.Activities_Plans[i].Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            }
+
         </div>
         <table class="table" id="productsAdded">
             <tr> <th class="col-md-2"> Ćwiczenie </th> <th class="col-md-2"> Czas </th> <th class="col-md-2"> Opis </th>  <th> </th></tr>
@@ -33,11 +43,11 @@
                 <tr data-productAdded=@Model.Activities[i].Id style="display: none;">
                     <td>  @Model.Activities[i].Type </td>
                     
-                    <td data-factor=@Model.Activities[i].Time> </td>
+                   
                     <td data-factor=@Model.Activities[i].Description> </td>
                     
                     @Html.HiddenFor(model => model.Activities[i].Id)
-                    @Html.HiddenFor(model => model.Activities[i].Time)
+                  
                     @Html.HiddenFor(model => model.Activities[i].Description)
                     
                     <td> <button name="removeProductButton" onclick="return false;" class="btn-sm" id=@Model.Activities[i].Id> X </button> </td>
@@ -63,7 +73,7 @@
                 <tr style="opacity: 1" data-productFromList=@Model.Activities[i].Id>
                     <td>  @Model.Activities[i].Type</td>
 
-                    <td> @Model.Activities[i].Time </td>
+                   
                     <td> @Model.Activities[i].Description </td>
                     
                     <td> <button style="display: block" onclick="return false;" name="addDishesButton" class="btn-sm" id=@Model.Activities[i].Id> Dodaj </button> </td>

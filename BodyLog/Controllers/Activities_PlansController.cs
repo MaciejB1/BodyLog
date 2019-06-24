@@ -74,7 +74,7 @@ namespace BodyLog.Controllers
         public ActionResult Create(Global_Model list, TrainingPlansModel training)
         {
 
-            var selectedActivities = list.Activities.Where(x => x.Time > 0).ToList<ActivitiesModels>();
+            var selectedActivities = list.Activities.ToList<ActivitiesModels>();
 
 
             /*float calories = 0, carbo = 0, proteins = 0, fats = 0;
@@ -106,7 +106,7 @@ namespace BodyLog.Controllers
                 activities_Plans.Id_Training_Plans = id;
 
                 activities_Plans.Id_Activities = p.Id;
-                //dishesProducts.gram = p.Volume;
+                //activities_Plans.Time = p.;
                 db.Activities_Plans.Add(activities_Plans);
                 db.SaveChanges();
             }

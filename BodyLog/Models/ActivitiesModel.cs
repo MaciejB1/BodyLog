@@ -16,10 +16,7 @@ namespace BodyLog.Models
         [Required(ErrorMessage = "Musisz podać typ ćwiczenia")]
         public string Type { get; set; }
 
-        [Display(Name = "Czas w minutach")]
-        [Required(ErrorMessage = "Musisz czas wykonywania ćwiczenia")]
-        [Range(1, 999, ErrorMessage = "Czas musi być dodatni")]
-        public int Time { get; set; }
+        
 
         [Display(Name = "Opis")]
         public string Description { get; set; }

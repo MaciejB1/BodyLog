@@ -236,7 +236,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivitiesModel.cs" />
-    <Compile Include="Models\ActivitiesPlansModel.cs" />
+    <Compile Include="Models\Activities_PlansModel.cs" />
     <Compile Include="Models\DishesModel.cs" />
     <Compile Include="Models\Dishes_ProductsModel.cs" />
     <Compile Include="Models\IsNameExist.cs" />

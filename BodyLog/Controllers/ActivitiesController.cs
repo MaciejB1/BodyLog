@@ -80,7 +80,7 @@ namespace BodyLog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,Time,Description,UserId")] ActivitiesModels activitiesModel)
+        public ActionResult Edit([Bind(Include = "Id,Type,Description,UserId")] ActivitiesModels activitiesModel)
         {
             if (ModelState.IsValid)
             {

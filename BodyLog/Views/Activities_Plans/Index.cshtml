@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Treningi</h2>
+<h2>Treningi </h2>
 
 <p>
     @Html.ActionLink("Dodaj nowy", "Create")
@@ -12,23 +12,25 @@
 
 @for (int i = 0; i < Model.TrainingsList.Count; i++)
 {
-    <h3> @Model.TrainingsList[i].Name </h3>
+    <h3> @Model.TrainingsList[i].Name @Model.TrainingsList[i].Date_start @Model.TrainingsList[i].Date_end </h3>
     <table class="table-condensed" style="margin-bottom: 30px; margin-top: 5px; width: 650px">
         <tr> <th class="col-md-2"> Ćwiczenie </th> <th class="col-md-2"> Czas </th> <th class="col-md-2"> Opis </th>  <th> </th></tr>
-        @foreach (var item in Model.Activities_Plans.Where(activity => activity.Id_Activities == Model.Activities[i].Id))
+        @foreach (var item in Model.Activities_Plans.Where(activity => activity.Id_Activities == Model.TrainingsList[i].Id))
         {
             <tr>
                 <td width="300px">
-                    @Model.Activities.Find(p => p.Id == @item.Id_Training_Plans).Type
+                    @Model.Activities.Find(p => p.Id == @item.Id_Activities).Type
                 </td>
                 <td>
-                    @Model.Activities.Find(p => p.Id == Model.TrainingsList[i].Id).Time
+                    @(Model.Activities_Plans.Find(p => p.Id_Activities == @item.Id_Activities).Time )
                 </td>
-                
+                <td>
+                    @Model.Activities.Find(p => p.Id == @item.Id_Activities).Description
+                </td>
             </tr>
         }
         <tr> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td><td> </td></tr>
-       
+
         <tr>
             <td>
                 @Html.ActionLink("Usun", "Delete", new { id = Model.TrainingsList[i].Id })

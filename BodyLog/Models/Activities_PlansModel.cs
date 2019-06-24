@@ -11,10 +11,15 @@ namespace BodyLog.Models
     public class Activities_Plans
     {
         [Key, Column(Order = 0)]
-        public int Id_ActivitiesModels { get; set; }
+        public int Id_Activities { get; set; }
 
         [Key, Column(Order = 1)]
-        public int Training_Plans { get; set; }
+        public int Id_Training_Plans { get; set; }
+
+        [Display(Name = "Czas w minutach")]
+        [Required(ErrorMessage = "Musisz czas wykonywania ćwiczenia")]
+        [Range(1, 999, ErrorMessage = "Czas musi być dodatni")]
+        public int Time { get; set; }
 
     }
 
