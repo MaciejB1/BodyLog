@@ -3,6 +3,7 @@ const buttonsRemove = document.querySelectorAll("button[name='removeProductButto
 const inputsVolume = document.querySelectorAll(".inputsVolume");
 
 document.querySelectorAll('.inputsVolume ').forEach((element) => {
+
     if (element.value === "0") {
         element.value = "";
     } else {
@@ -17,29 +18,39 @@ function valid(){
     const inputName = document.querySelector("input[name='Dishes.Name']");
     const validMessage = document.getElementById("validMessage");
     validMessage.innerHTML = "";
+    let valid = true;
+        inputName.style.border = "1px solid #cccccc";
+    
     if (inputName.value.length < 1) {
         inputName.style.border = "1px solid red";
-        validMessage.innerHTML = "Uzupełnij nazwę dania!";
-        return false;
+        validMessage.innerHTML = `Uzupełnij nazwę dania! \n`;
+        valid = false;
     }
+
+
     let count = 0;
+    let flag = false;
     for (let item of inputsVolume) {
         if (item.parentElement.parentElement.style.display == "table-row") {
             count++;
+            item.style.border = "1px solid #cccccc";
             if (item.value.length < 1) {
-                validMessage.innerHTML = "Wprowadź ilość w gramach dla każdego wybranego produktu!"
+                if(!flag)
+                    validMessage.innerHTML +=  `Wprowadź ilość w gramach dla każdego wybranego produktu! \n`
                 item.style.border = "1px solid red";
-                return false;
-            }  
+                valid = false;
+                flag = true;
+            }
+            
         }
     }
 
     if (count == 0) {
-        validMessage.innerHTML = "Nie wybrałeś żadnego produktu!";
-        return false;
+        validMessage.innerHTML +=  "Nie wybrałeś żadnego produktu!";
+        valid = false;
     }
 
-    return true;
+    return valid;
 }
 
 
@@ -96,10 +107,28 @@ for (let item of buttonsRemove) {
 
 for (let item of inputsVolume) {
     input(item.value, item.parentElement.dataset.productedited);
-  
+
+    setInputFilter(item, function (value) {
+        return /^\d*$/.test(value) && (value === "" || parseInt(value) > 0);
+    })
+
     item.addEventListener("input", (e) => {
-        console.log(e.target.parentElement.dataset.productedited);
+  
         input(e.target.value, e.target.parentElement.dataset.productedited);
     });
 
+}
+function setInputFilter(textbox, inputFilter) {
+    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+        textbox.addEventListener(event, function () {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            }
+        });
+    });
 }
