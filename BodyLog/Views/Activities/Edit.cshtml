@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edytuj</h2>
+<h2>Edycja</h2>
 
 
 @using (Html.BeginForm())
@@ -12,6 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+       
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -39,6 +40,8 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

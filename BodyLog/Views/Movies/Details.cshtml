@@ -1,0 +1,23 @@
+﻿@using BodyLog.Models
+@model BodyLog.Models.Movies
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string source = "http://www.youtube.com/embed/" + Model.yt_id + "?autoplay=1";
+}
+
+<h2>@Html.DisplayFor(model => model.name)</h2>
+
+<div>
+    <h4>Filmy instruktażowe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <iframe type="text/html" width="640" height="385" src=@source frameborder="0"></iframe>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Powrót do listy filmów", "Index")
+</p>

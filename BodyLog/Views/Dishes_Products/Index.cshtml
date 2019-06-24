@@ -9,7 +9,7 @@
 @for (int i = 0; i < Model.DishesList.Count; i++)
 {
     <h3> @Model.DishesList[i].Name </h3>
-    <table class="table-condensed" style="margin-bottom: 30px; margin-top: 5px; width: 550px">
+    <table class="table-condensed" style="margin-bottom: 30px; margin-top: 5px; width: 650px">
         <tr> <th class="col-md-2"> Produkt </th> <th class="col-md-2"> Ilość </th> <th class="col-md-2"> Kalorie </th> <th class="col-md-2"> Białko </th> <th class="col-md-3">Węglowodany</th> <th class="col-md-2"> Tłuszcze</th> <th> </th></tr>
         @foreach (var item in Model.Dishes_Products.Where(dish => dish.Id_Dishes == Model.DishesList[i].Id))
         {

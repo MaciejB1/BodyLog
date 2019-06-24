@@ -18,7 +18,7 @@ namespace BodyLog.Controllers
         // GET: ActivitiesModels
         public ActionResult Index()
         {
-            return View(db.Activities.ToList());
+            return View(db.ActivitiesModels.ToList());
         }
 
         // GET: ActivitiesModels/Details/5
@@ -28,7 +28,7 @@ namespace BodyLog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ActivitiesModel activitiesModel = db.Activities.Find(id);
+            ActivitiesModels activitiesModel = db.ActivitiesModels.Find(id);
             if (activitiesModel == null)
             {
                 return HttpNotFound();
@@ -47,12 +47,12 @@ namespace BodyLog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Type,Time,Description,UserId")] ActivitiesModel activitiesModel)
+        public ActionResult Create([Bind(Include = "Id,Type,Time,Description,UserId")] ActivitiesModels activitiesModel)
         {
             if (ModelState.IsValid)
             {
                 activitiesModel.UserId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                db.Activities.Add(activitiesModel);
+                db.ActivitiesModels.Add(activitiesModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -67,7 +67,7 @@ namespace BodyLog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ActivitiesModel activitiesModel = db.Activities.Find(id);
+            ActivitiesModels activitiesModel = db.ActivitiesModels.Find(id);
             if (activitiesModel == null)
             {
                 return HttpNotFound();
@@ -80,7 +80,7 @@ namespace BodyLog.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,Time,Description,UserId")] ActivitiesModel activitiesModel)
+        public ActionResult Edit([Bind(Include = "Id,Type,Time,Description,UserId")] ActivitiesModels activitiesModel)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace BodyLog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ActivitiesModel activitiesModel = db.Activities.Find(id);
+            ActivitiesModels activitiesModel = db.ActivitiesModels.Find(id);
             if (activitiesModel == null)
             {
                 return HttpNotFound();
@@ -111,8 +111,8 @@ namespace BodyLog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ActivitiesModel activitiesModel = db.Activities.Find(id);
-            db.Activities.Remove(activitiesModel);
+            ActivitiesModels activitiesModel = db.ActivitiesModels.Find(id);
+            db.ActivitiesModels.Remove(activitiesModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -20,13 +20,13 @@ namespace BodyLog.Models
         [Display(Name = "Data rozpoczęcia")]
         [Required(ErrorMessage = "Musisz podać datę rozpoczęcia treningu")]
         [DataType(DataType.Date, ErrorMessage = "Musisz wprowadzić prawidłową datę")]
-        [DateValid]
         public DateTime Date_start { get; set; }
 
         [Display(Name = "Data zakończenia")]
         [Required(ErrorMessage = "Musisz podać datę zakończenia treningu")]
         [DataType(DataType.Date, ErrorMessage = "Musisz wprowadzić prawidłową datę")]
-        [DateValid]
         public DateTime Date_end { get; set; }
+
+        public virtual string UserId { get; set; }
     }
 }

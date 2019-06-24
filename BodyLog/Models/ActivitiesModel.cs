@@ -6,7 +6,8 @@ using System.Web;
 
 namespace BodyLog.Models
 {
-    public class ActivitiesModel
+    [MetadataType(typeof(ActivitiesModels))]
+    public class ActivitiesModels
     {
         [Key]
         public int Id { get; set; }
@@ -15,7 +16,7 @@ namespace BodyLog.Models
         [Required(ErrorMessage = "Musisz podać typ ćwiczenia")]
         public string Type { get; set; }
 
-        [Display(Name = "Czas")]
+        [Display(Name = "Czas w minutach")]
         [Required(ErrorMessage = "Musisz czas wykonywania ćwiczenia")]
         [Range(1, 999, ErrorMessage = "Czas musi być dodatni")]
         public int Time { get; set; }
@@ -24,5 +25,13 @@ namespace BodyLog.Models
         public string Description { get; set; }
 
         public virtual string UserId { get; set; }
+    }
+
+    public class Global_Model
+    {
+        public List<ActivitiesModels> Activities { get; set; }
+        public TrainingPlansModel Training { get; set; }
+        public List<TrainingPlansModel> TrainingsList { get; set; }
+        public List<Activities_Plans> Activities_Plans { get; set; }
     }
 }

@@ -1,43 +1,80 @@
-﻿@model BodyLog.Models.Activities_Plans
-
+﻿@model BodyLog.Models.Global_Model
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Stwórz trening z ćwiczeń";
 }
+<h2>Stwórz trening z ćwiczeń</h2>
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Activities_Plans</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id_ActivitiesModels, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Id_ActivitiesModels, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Id_ActivitiesModels, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Training_Plans, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="">
+        <div class="row" style="margin-top: 20px;">
+            @Html.LabelFor(model => model.Training.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Training_Plans, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Training_Plans, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Training.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Training.Name, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Training.Date_start, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Training.Date_start, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Training.Date_start, "", new { @class = "text-danger" })
+            </div>
+            @Html.LabelFor(model => model.Training.Date_end, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Training.Date_end, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Training.Date_end, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        <table class="table" id="productsAdded">
+            <tr> <th class="col-md-2"> Ćwiczenie </th> <th class="col-md-2"> Czas </th> <th class="col-md-2"> Opis </th>  <th> </th></tr>
+            @for (int i = 0; i < Model.Activities.Count; i++) 
+            {
+                <tr data-productAdded=@Model.Activities[i].Id style="display: none;">
+                    <td>  @Model.Activities[i].Type </td>
+                    
+                    <td data-factor=@Model.Activities[i].Time> </td>
+                    <td data-factor=@Model.Activities[i].Description> </td>
+                    
+                    @Html.HiddenFor(model => model.Activities[i].Id)
+                    @Html.HiddenFor(model => model.Activities[i].Time)
+                    @Html.HiddenFor(model => model.Activities[i].Description)
+                    
+                    <td> <button name="removeProductButton" onclick="return false;" class="btn-sm" id=@Model.Activities[i].Id> X </button> </td>
+                </tr>
+            }
+        </table>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div class="col-md-12" style="margin-bottom: 40px">
+        <input type="submit" value="Dodaj" class="btn btn-default" />
+    </div>
+
+   
+
+
+
+    <div class="row" style="margin-top: 20px">
+        <table class="table-condensed">
+            <tr> <th> Ćwiczenie </th> <th> Czas </th> <th> Opis </th>  <th> </th></tr>
+            @for (int i = 0; i < Model.Activities.Count; i++)
+            {
+
+                <tr style="opacity: 1" data-productFromList=@Model.Activities[i].Id>
+                    <td>  @Model.Activities[i].Type</td>
+
+                    <td> @Model.Activities[i].Time </td>
+                    <td> @Model.Activities[i].Description </td>
+                    
+                    <td> <button style="display: block" onclick="return false;" name="addDishesButton" class="btn-sm" id=@Model.Activities[i].Id> Dodaj </button> </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+
+
+
+
+    <script src="~/Scripts/createDishes.js"></script>
+}

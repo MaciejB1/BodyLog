@@ -1,27 +1,39 @@
-﻿@model IEnumerable<BodyLog.Models.Activities_Plans>
+﻿@model BodyLog.Models.Global_Model
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Treningi</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj nowy", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+@for (int i = 0; i < Model.TrainingsList.Count; i++)
+{
+    <h3> @Model.TrainingsList[i].Name </h3>
+    <table class="table-condensed" style="margin-bottom: 30px; margin-top: 5px; width: 650px">
+        <tr> <th class="col-md-2"> Ćwiczenie </th> <th class="col-md-2"> Czas </th> <th class="col-md-2"> Opis </th>  <th> </th></tr>
+        @foreach (var item in Model.Activities_Plans.Where(activity => activity.Id_Activities == Model.Activities[i].Id))
+        {
+            <tr>
+                <td width="300px">
+                    @Model.Activities.Find(p => p.Id == @item.Id_Training_Plans).Type
+                </td>
+                <td>
+                    @Model.Activities.Find(p => p.Id == Model.TrainingsList[i].Id).Time
+                </td>
+                
+            </tr>
+        }
+        <tr> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td><td> </td></tr>
+       
+        <tr>
+            <td>
+                @Html.ActionLink("Usun", "Delete", new { id = Model.TrainingsList[i].Id })
+            </td>
+            <td></td>
+        </tr>
+    </table>
 }
-
-</table>

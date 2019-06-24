@@ -12,4 +12,11 @@ public class DefaultConnection : DbContext
     public DbSet<Dishes>  Dishes { get; set; }
     public DbSet<Dishes_Products> Dishes_Products { get; set; }
     public System.Data.Entity.DbSet<BodyLog.Models.Weights> Weights { get; set; }
+    public DbSet<Movies> MoviesDbSet { get; set; }
+
+    public System.Data.Entity.DbSet<BodyLog.Models.ActivitiesModels> ActivitiesModels { get; set; }
+
+    public System.Data.Entity.DbSet<BodyLog.Models.TrainingPlansModel> TrainingPlansModels { get; set; }
+
+    public System.Data.Entity.DbSet<BodyLog.Models.Activities_Plans> Activities_Plans { get; set; }
 }
